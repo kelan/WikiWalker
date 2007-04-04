@@ -3,9 +3,9 @@ TODO:
 * try to use JS to get coordinates of link on screen (Jonathan Wight's suggetion)
 	* look at: http://blog.firetree.net/2005/07/04/javascript-find-position/
 
+
+* make stopAnimation do something
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 Did this revision:
-* added notes.txt and Release Notes.txt files to both TM and Xcode project
-* Added a check in webViewDidFinishLoading: to make sure it is the correct webview posting the notifications
-	* there can be multiple in 1 process if there is 2 screens, or by pressing "Test" in System Prefs (while the preview is running).  This is what was causing LOTS of my crashes before.
-* Made the scrolling text a bit smaller
+* Changed tmproj to a basic one (instead of using "Import from Xcode", because that messes svn up)
+
