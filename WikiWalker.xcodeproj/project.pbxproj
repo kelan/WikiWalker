@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		43350DC50BC36B2B0048ECD0 /* notes.txt in Resources */ = {isa = PBXBuildFile; fileRef = 43350DC40BC36B2B0048ECD0 /* notes.txt */; };
+		43350DC70BC36C380048ECD0 /* Release Notes.txt in Resources */ = {isa = PBXBuildFile; fileRef = 43350DC60BC36C380048ECD0 /* Release Notes.txt */; };
 		436A254D0BBF3388002683A9 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 436A254C0BBF3388002683A9 /* WebKit.framework */; };
 		8D255AC70486D3F9007BF209 /* WikiWalker_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 32DBCFA80370C50100C91783 /* WikiWalker_Prefix.pch */; };
 		8D255AC80486D3F9007BF209 /* WikiWalkerView.h in Headers */ = {isa = PBXBuildFile; fileRef = F50079790118B23001CA0E54 /* WikiWalkerView.h */; };
@@ -23,6 +25,8 @@
 		089C167FFE841241C02AAC07 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		32DBCFA80370C50100C91783 /* WikiWalker_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WikiWalker_Prefix.pch; sourceTree = "<group>"; };
+		43350DC40BC36B2B0048ECD0 /* notes.txt */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; path = notes.txt; sourceTree = "<group>"; };
+		43350DC60BC36C380048ECD0 /* Release Notes.txt */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; path = "Release Notes.txt"; sourceTree = "<group>"; };
 		436A254C0BBF3388002683A9 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = /System/Library/Frameworks/WebKit.framework; sourceTree = "<absolute>"; };
 		8D255AD20486D3F9007BF209 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8D255AD30486D3F9007BF209 /* WikiWalker.saver */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WikiWalker.saver; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -47,6 +51,8 @@
 		089C166AFE841209C02AAC07 /* WikiWalker */ = {
 			isa = PBXGroup;
 			children = (
+				43350DC40BC36B2B0048ECD0 /* notes.txt */,
+				43350DC60BC36C380048ECD0 /* Release Notes.txt */,
 				08FB77AFFE84173DC02AAC07 /* Classes */,
 				32DBCFA70370C4F300C91783 /* Other Sources */,
 				089C167CFE841241C02AAC07 /* Resources */,
@@ -174,6 +180,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D255ACA0486D3F9007BF209 /* InfoPlist.strings in Resources */,
+				43350DC50BC36B2B0048ECD0 /* notes.txt in Resources */,
+				43350DC70BC36C380048ECD0 /* Release Notes.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

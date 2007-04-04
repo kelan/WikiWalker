@@ -176,36 +176,36 @@
 }
 
 - (void)webViewDidFinishLoading:(NSNotification *)notification {
-//	NSLog(@"%s", _cmd);
-	
-	// the first time, show  the page immediately, otherwise it will switch when the timer fires
-	if(currentImage == nil) {
-//	if(true) { // don't try threading yet
-//		NSLog(@"%s first time", _cmd);
-		[self prepareImageFromView:[[[webView mainFrame] frameView] documentView]];
-//		NSLog(@"getWikiLinksFromNodeTree");
-		[listOfWikiLinks removeAllObjects];
-		[self getWikiLinksFromNodeTree:[[webView mainFrame] DOMDocument]];
-//		NSLog(@"   got %u", [listOfWikiLinks count]);
+	NSLog(@"%s", _cmd);
+	// check to make sure its our webview that posted the notification, because there can be more than 1 for this process, if we're running multiple monitors, or even when you press "Test" from in System Prefs (this is what was causing my super crashiness earlier)
+	// the notification object is the webview
+	if([notification object] == webView) {
+		// the first time, show  the page immediately, otherwise it will switch when the timer fires
 		if(currentImage == nil) {
-			[self switchToNextPage:self];
+			[self prepareImageFromView:[[[webView mainFrame] frameView] documentView]];
+//			NSLog(@"getWikiLinksFromNodeTree");
+			[listOfWikiLinks removeAllObjects];
+			[self getWikiLinksFromNodeTree:[[webView mainFrame] DOMDocument]];
+//			NSLog(@"   got %u", [listOfWikiLinks count]);
+			if(currentImage == nil) {
+				[self switchToNextPage:self];
+			}
+		}
+		else {
+//			NSLog(@"%s Do separate threads", _cmd);
+			[NSThread detachNewThreadSelector:@selector(prepareImageFromViewOnNewThread:)
+		                             toTarget:self
+		                           withObject:[[[webView mainFrame] frameView] documentView]];
+//			NSLog(@" preparing image on new thread");
+
+			[listOfWikiLinks removeAllObjects];
+			[NSThread detachNewThreadSelector:@selector(getWikiLinksFromNodeTreeOnNewThread:)
+		                             toTarget:self
+		                           withObject:[[webView mainFrame] DOMDocument]];
+//			NSLog(@" getting links on separate thread");		
 		}
 	}
-	else {
-//		NSLog(@"%s Do separate threads", _cmd);
-		[NSThread detachNewThreadSelector:@selector(prepareImageFromViewOnNewThread:)
-	                             toTarget:self
-	                           withObject:[[[webView mainFrame] frameView] documentView]];
-	//	[self prepareImageFromView:[[[webView mainFrame] frameView] documentView]];
-//		NSLog(@" preparing image on new thread");
-
-		[listOfWikiLinks removeAllObjects];
-		[NSThread detachNewThreadSelector:@selector(getWikiLinksFromNodeTreeOnNewThread:)
-	                             toTarget:self
-	                           withObject:[[webView mainFrame] DOMDocument]];
-	/*/	[self getWikiLinksFromNodeTree:[[webView mainFrame] DOMDocument]];		*/
-//		NSLog(@" getting links on separate thread");		
-	}
+	
 }
 
 - (void)prepareImageFromView:(NSView *)view {
@@ -248,9 +248,9 @@
 	currentToRect = nextToRect;
 	currentFocalHeight = nextFocalHeight;
 	
-	titleOrigin = NSMakePoint([self bounds].size.width,[self bounds].size.height*0.05);
+	titleOrigin = NSMakePoint([self bounds].size.width,[self bounds].size.height*0.25);
 	currentTitleWidth = [currentPageTitle sizeWithAttributes:titleAttributes].width;
-	float fontSize = [self bounds].size.height * 0.75;
+	float fontSize = [self bounds].size.height * 0.50;
 	[titleAttributes setObject:[NSFont fontWithName:@"Lucida Grande" size:fontSize]
 						forKey:NSFontAttributeName];
 	
