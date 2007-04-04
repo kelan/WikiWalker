@@ -1,0 +1,241 @@
+// !$*UTF8*$!
+{
+	089C1669FE841209C02AAC07 /* Project object */ = {
+		activeBuildConfigurationName = Release;
+		activeTarget = 8D255AC50486D3F9007BF209 /* WikiWalker */;
+		addToTargets = (
+			8D255AC50486D3F9007BF209 /* WikiWalker */,
+		);
+		breakpoints = (
+		);
+		codeSenseManager = 437B7BCC0BBE6A7000E27F66 /* Code sense */;
+		perUserDictionary = {
+			PBXConfiguration.PBXFileTableDataSource3.PBXErrorsWarningsDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXErrorsWarningsDataSource_LocationID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					300,
+					300.2085,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXErrorsWarningsDataSource_TypeID,
+					PBXErrorsWarningsDataSource_MessageID,
+					PBXErrorsWarningsDataSource_LocationID,
+				);
+			};
+			PBXConfiguration.PBXFileTableDataSource3.PBXFileTableDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					410,
+					20,
+					48,
+					43,
+					43,
+					20,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+					PBXFileDataSource_Target_ColumnID,
+				);
+			};
+			PBXPerProjectTemplateStateSaveDate = 197354758;
+			PBXWorkspaceStateSaveDate = 197354758;
+		};
+		perUserProjectItems = {
+			43350DAA0BC3650C0048ECD0 /* PBXTextBookmark */ = 43350DAA0BC3650C0048ECD0 /* PBXTextBookmark */;
+			43D538F40BC0518A007B531B = 43D538F40BC0518A007B531B /* PBXTextBookmark */;
+			43D538F50BC0518A007B531B = 43D538F50BC0518A007B531B /* PBXTextBookmark */;
+			43D538F90BC0518A007B531B = 43D538F90BC0518A007B531B /* PBXTextBookmark */;
+			43D538FA0BC0518A007B531B = 43D538FA0BC0518A007B531B /* PBXTextBookmark */;
+			43D538FB0BC0518A007B531B = 43D538FB0BC0518A007B531B /* PBXTextBookmark */;
+			43D539070BC05209007B531B = 43D539070BC05209007B531B /* PBXTextBookmark */;
+			43D539080BC05209007B531B = 43D539080BC05209007B531B /* PBXTextBookmark */;
+			43D539560BC060C1007B531B = 43D539560BC060C1007B531B /* PBXTextBookmark */;
+			43D539570BC060C1007B531B = 43D539570BC060C1007B531B /* PBXBookmark */;
+			43D539580BC060C1007B531B = 43D539580BC060C1007B531B /* PBXTextBookmark */;
+			43D539590BC060C1007B531B = 43D539590BC060C1007B531B /* PBXTextBookmark */;
+		};
+		sourceControlManager = 437B7BCB0BBE6A7000E27F66 /* Source Control */;
+		userBuildSettings = {
+		};
+	};
+	089C167EFE841241C02AAC07 /* English */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {602, 575}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRect = "{{0, 0}, {602, 575}}";
+		};
+	};
+	43350DAA0BC3650C0048ECD0 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8D255AD20486D3F9007BF209 /* Info.plist */;
+		name = "Info.plist: 14";
+		rLen = 0;
+		rLoc = 489;
+		rType = 0;
+		vrLen = 861;
+		vrLoc = 0;
+	};
+	437B7BCB0BBE6A7000E27F66 /* Source Control */ = {
+		isa = PBXSourceControlManager;
+		fallbackIsa = XCSourceControlManager;
+		isSCMEnabled = 0;
+		scmConfiguration = {
+		};
+		scmType = "";
+	};
+	437B7BCC0BBE6A7000E27F66 /* Code sense */ = {
+		isa = PBXCodeSenseManager;
+		indexTemplatePath = "";
+	};
+	43D538F40BC0518A007B531B /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 089C167EFE841241C02AAC07 /* English */;
+		name = "English: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 110;
+		vrLoc = 0;
+	};
+	43D538F50BC0518A007B531B /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 43D538F60BC0518A007B531B /* WikiWalkerView.h */;
+		name = "(null): 15";
+		rLen = 0;
+		rLoc = 275;
+		rType = 0;
+		vrLen = 820;
+		vrLoc = 0;
+	};
+	43D538F60BC0518A007B531B /* WikiWalkerView.h */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.c.h;
+		name = WikiWalkerView.h;
+		path = "/Users/tempkelan/Programming/YRK/IronCoder5/My Stuff/WikiWalker BU 2007-03-31_23-17/WikiWalkerView.h";
+		sourceTree = "<absolute>";
+	};
+	43D538F90BC0518A007B531B /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = F500797A0118B23001CA0E54 /* WikiWalkerView.m */;
+		name = "WikiWalkerView.m: webView:didReceiveTitle:forFrame:";
+		rLen = 0;
+		rLoc = 9522;
+		rType = 0;
+		vrLen = 1565;
+		vrLoc = 24;
+	};
+	43D538FA0BC0518A007B531B /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 089C167EFE841241C02AAC07 /* English */;
+		name = "English: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 110;
+		vrLoc = 0;
+	};
+	43D538FB0BC0518A007B531B /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 43D538FC0BC0518A007B531B /* WikiWalkerView.h */;
+		name = "(null): 15";
+		rLen = 0;
+		rLoc = 275;
+		rType = 0;
+		vrLen = 820;
+		vrLoc = 0;
+	};
+	43D538FC0BC0518A007B531B /* WikiWalkerView.h */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.c.h;
+		name = WikiWalkerView.h;
+		path = "/Users/tempkelan/Programming/YRK/IronCoder5/My Stuff/WikiWalker BU 2007-03-31_23-17/WikiWalkerView.h";
+		sourceTree = "<absolute>";
+	};
+	43D539070BC05209007B531B /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = F50079790118B23001CA0E54 /* WikiWalkerView.h */;
+		name = "WikiWalkerView.h: 53";
+		rLen = 0;
+		rLoc = 1229;
+		rType = 0;
+		vrLen = 967;
+		vrLoc = 0;
+	};
+	43D539080BC05209007B531B /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = F50079790118B23001CA0E54 /* WikiWalkerView.h */;
+		name = "WikiWalkerView.h: 53";
+		rLen = 0;
+		rLoc = 1229;
+		rType = 0;
+		vrLen = 967;
+		vrLoc = 0;
+	};
+	43D539560BC060C1007B531B /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = F500797A0118B23001CA0E54 /* WikiWalkerView.m */;
+		name = "WikiWalkerView.m: 388";
+		rLen = 0;
+		rLoc = 13828;
+		rType = 0;
+		vrLen = 1840;
+		vrLoc = 8589;
+	};
+	43D539570BC060C1007B531B /* PBXBookmark */ = {
+		isa = PBXBookmark;
+		fRef = 8D255AD20486D3F9007BF209 /* Info.plist */;
+	};
+	43D539580BC060C1007B531B /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = F500797A0118B23001CA0E54 /* WikiWalkerView.m */;
+		name = "WikiWalkerView.m: 388";
+		rLen = 0;
+		rLoc = 13828;
+		rType = 0;
+		vrLen = 1840;
+		vrLoc = 8589;
+	};
+	43D539590BC060C1007B531B /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8D255AD20486D3F9007BF209 /* Info.plist */;
+		name = "Info.plist: 14";
+		rLen = 0;
+		rLoc = 489;
+		rType = 0;
+		vrLen = 861;
+		vrLoc = 0;
+	};
+	8D255AC50486D3F9007BF209 /* WikiWalker */ = {
+		activeExec = 0;
+	};
+	8D255AD20486D3F9007BF209 /* Info.plist */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {686, 575}}";
+			sepNavSelRange = "{489, 0}";
+			sepNavVisRect = "{{0, 0}, {602, 575}}";
+		};
+	};
+	F50079790118B23001CA0E54 /* WikiWalkerView.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {602, 742}}";
+			sepNavSelRange = "{1229, 0}";
+			sepNavVisRect = "{{0, 0}, {602, 575}}";
+		};
+	};
+	F500797A0118B23001CA0E54 /* WikiWalkerView.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {980, 5432}}";
+			sepNavSelRange = "{13828, 0}";
+			sepNavVisRect = "{{0, 3462}, {602, 575}}";
+		};
+	};
+}
