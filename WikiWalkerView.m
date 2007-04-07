@@ -8,6 +8,7 @@
 
 #import "WikiWalkerView.h"
 
+@class WWOffscreenWebView;
 
 @implementation ComYeahRightKeller_WikiWalkerView
 
@@ -16,17 +17,13 @@
     if (self) {
         [self setAnimationTimeInterval:1/60.0];
 		
-		webView = [[WebView alloc] initWithFrame:NSMakeRect(0, 0, 800, 600)
-                                       frameName:@"YRKmainFrame"
-                                       groupName:@"YRKgroup"];
-		[webView setFrameLoadDelegate:self];
+		offscreenWebView = [[WWOffscreenWebView alloc] initWithFrame:NSMakeRect(0, 0, 800, 600)];
 		
 		startingURL = [[NSString alloc] initWithString:@"http://en.wikipedia.org/wiki/Life_%28disambiguation%29"];
 		periodLength = 15.0;	// seconds
 		transitionLength = 5.0;	// seconds
 		
 		currentPageTitle = [[NSString alloc] initWithString:@"Loading..."];
-		nextPageTitle = [[NSString alloc] initWithString:@"NextTitle"];
 		
 		// Create the title attributes dictions
 		titleAttributes = [[NSMutableDictionary alloc] init];
@@ -41,17 +38,16 @@
 		[shadow setShadowBlurRadius:fontSize*0.15];
 		[titleAttributes setObject:shadow forKey:NSShadowAttributeName];
 		titleOrigin = NSMakePoint(10,10);
-		
-		frameCounter = 0;
-		
-		// Register to see when webview is done loading
+				
+//		switchTimer = [[NSTimer alloc] init];
+				
+		// Register to see when an image is read
 		[[NSNotificationCenter defaultCenter] addObserver:self
-												 selector:@selector(webViewDidFinishLoading:)
-													 name:WebViewProgressFinishedNotification
+												 selector:@selector(webImageIsReady:)
+													 name:@"WWWebImageIsReady"
 												   object:nil];
-		
-		listOfWikiLinks = [[NSMutableArray alloc] init];
-		switchTimer = [[NSTimer alloc] init];
+
+		[offscreenWebView startLoadingPageFromURL:[NSURL URLWithString:startingURL]];
     }
     return self;
 }
@@ -62,6 +58,7 @@
 	[webView release];
 	[startingURL release];
 	[currentPageTitle release];
+	[nextPageTitle release]
 	[titleAttributes release];
 	
 	[listOfWikiLinks release];
@@ -79,7 +76,6 @@
 - (void)startAnimation {
 	[super startAnimation];
 	periodStartTime = CFAbsoluteTimeGetCurrent();
-	[self startLoadingPageFromURL:[NSURL URLWithString:startingURL]];
 }
 
 - (void)stopAnimation {
@@ -91,20 +87,26 @@
 }
 
 - (void)drawRect:(NSRect)rect {
+	[super drawRect:rect];
+	
 	float elapsedTime = CFAbsoluteTimeGetCurrent()-periodStartTime;
-//	NSLog(@"%s", _cmd);
-    [super drawRect:rect];
+//	NSLog(@"%s imagesize=%0.2f,%0.2f", _cmd, [currentImage size].width, [currentImage size].height);
+//	NSLog(@"%s torect=%0.2f,%0.2f,%0.2f,%0.2f", _cmd, currentToRect.origin.x, currentToRect.origin.y, currentToRect.size.width, currentToRect.size.height);
+//	NSLog(@"%s fromrect=%0.2f,%0.2f,%0.2f,%0.2f", _cmd, currentFromRect.origin.x, currentFromRect.origin.y, currentFromRect.size.width, currentFromRect.size.height);
 //	NSLog(@"%s SUPER DONE", _cmd);
+	
 	float fraction;
 	if(elapsedTime >= periodLength - transitionLength) {
-		[nextImage drawInRect:nextToRect fromRect:nextFromRect operation:NSCompositeSourceOver fraction:1.0];
+		NSLog(@"%s next image", _cmd);
+//		[nextImage drawInRect:nextToRect fromRect:nextFromRect operation:NSCompositeSourceOver fraction:1.0];
 		fraction = (periodLength-elapsedTime)/transitionLength;
 	}
 	else {
 		fraction = 1.0;
 	}
-	[currentImage drawInRect:currentToRect fromRect:currentFromRect operation:NSCompositeSourceOver fraction:fraction];
-//	NSLog(@"%s IMAGE DONE", _cmd);
+//	NSLog(@"%s current image", _cmd);
+//	[currentImage drawInRect:currentToRect fromRect:currentFromRect operation:NSCompositeSourceOver fraction:fraction];
+//	NSLog(@"%s page title", _cmd);
 	[currentPageTitle drawAtPoint:titleOrigin withAttributes:titleAttributes];
 //	NSLog(@"%s DONE", _cmd);
 }
@@ -112,7 +114,6 @@
 - (void)animateOneFrame {
 	float elapsedTime = CFAbsoluteTimeGetCurrent()-periodStartTime;
 //	NSLog(@"%s elapsed time=%0.2f", _cmd, elapsedTime);
-	frameCounter++;
 	if(currentImage != nil) {
 		NSRect bounds = [self bounds];
 
@@ -169,56 +170,20 @@
 #pragma mark Helper
 //------------------------------------------------------------------------------
 
-- (void)startLoadingPageFromURL:(NSURL *)url {
-//	NSLog(@"%s %@", _cmd, url);
-	[[webView mainFrame] loadRequest:[NSURLRequest requestWithURL:url]];
-	nextURL = [url copy];
-}
-
-- (void)webViewDidFinishLoading:(NSNotification *)notification {
-	NSLog(@"%s", _cmd);
-	// check to make sure its our webview that posted the notification, because there can be more than 1 for this process, if we're running multiple monitors, or even when you press "Test" from in System Prefs (this is what was causing my super crashiness earlier)
-	// the notification object is the webview
-	if([notification object] == webView) {
-		// the first time, show  the page immediately, otherwise it will switch when the timer fires
-		if(currentImage == nil) {
-			[self prepareImageFromView:[[[webView mainFrame] frameView] documentView]];
-//			NSLog(@"getWikiLinksFromNodeTree");
-			[listOfWikiLinks removeAllObjects];
-			[self getWikiLinksFromNodeTree:[[webView mainFrame] DOMDocument]];
-//			NSLog(@"   got %u", [listOfWikiLinks count]);
-			if(currentImage == nil) {
-				[self switchToNextPage:self];
-			}
+- (void)webImageIsReady:(NSNotification *)notification {
+	if([notification object] == offscreenWebView) {
+		NSLog(@"%s getting next image", _cmd);
+		// Immediately put the first image to screen.  The rest will be pushed by the switchTimer
+		BOOL updateImmediately = NO;
+		if(nextImage == nil) {
+			NSLog(@"%s will update immediatly", _cmd);
+			updateImmediately = YES;
 		}
-		else {
-//			NSLog(@"%s Do separate threads", _cmd);
-			[NSThread detachNewThreadSelector:@selector(prepareImageFromViewOnNewThread:)
-		                             toTarget:self
-		                           withObject:[[[webView mainFrame] frameView] documentView]];
-//			NSLog(@" preparing image on new thread");
-
-			[listOfWikiLinks removeAllObjects];
-			[NSThread detachNewThreadSelector:@selector(getWikiLinksFromNodeTreeOnNewThread:)
-		                             toTarget:self
-		                           withObject:[[webView mainFrame] DOMDocument]];
-//			NSLog(@" getting links on separate thread");		
-		}
-	}
-	
-}
-
-- (void)prepareImageFromView:(NSView *)view {
-//	NSLog(@"%s", _cmd);
-	NSRect viewRect = [view bounds];
-	NSBitmapImageRep *imageRep = [view bitmapImageRepForCachingDisplayInRect:viewRect];
-	[view cacheDisplayInRect:viewRect toBitmapImageRep:imageRep];
-	NSSize repSize = [imageRep size];
-	
-	if(repSize.width > 0) {
-		nextImage = [[NSImage alloc] initWithSize:viewRect.size];
-		[nextImage addRepresentation:imageRep];
-		[nextImage setScalesWhenResized:NO];
+		
+//		[nextImage release];
+		nextImage = [[offscreenWebView imageOfContent] retain];
+		nextPageTitle = [[offscreenWebView pageTitle] retain];
+		NSLog(@"%s nextimageheight=%0.2f, title=%@", _cmd, [nextImage size].height, nextPageTitle);
 		
 		nextFromRect = NSMakeRect(0, 0, [nextImage size].width, [nextImage size].height);
 		float toHeight = [self bounds].size.height;
@@ -230,20 +195,22 @@
 							[self bounds].size.height-toHeight,
 							toWidth,
 							toHeight);
-
-		nextFocalHeight = SSRandomFloatBetween(0,1.0);	
+		
+		// TODO: remove this test
+//		updateImmediately = YES;
+		if(updateImmediately) {
+			[self switchToNextPage:self];
+		}
 	}
 }
 
 - (void)switchToNextPage:(id)sender {
-//	NSLog(@"%s %@ -> %@", _cmd, currentPageTitle, nextPageTitle);
+	NSLog(@"%s %@ -> %@", _cmd, currentPageTitle, nextPageTitle);
 	NSImage *lastImage = currentImage;
 	NSString *lastPageTitle = currentPageTitle;
-	NSURL *lastURL = currentURL;
 	
 	currentImage = nextImage;
 	currentPageTitle = nextPageTitle;
-	currentURL = nextURL;
 	currentFromRect = nextFromRect;
 	currentToRect = nextToRect;
 	currentFocalHeight = nextFocalHeight;
@@ -253,18 +220,17 @@
 	float fontSize = [self bounds].size.height * 0.50;
 	[titleAttributes setObject:[NSFont fontWithName:@"Lucida Grande" size:fontSize]
 						forKey:NSFontAttributeName];
-	
-	
-	[lastImage release];
-	[lastPageTitle release];
-	[lastURL release];
+
+	// TODO: release these
+/*	[lastImage release];
+	[lastPageTitle release];*/
 	
 	// Mark this time as the start of the period
 	periodStartTime = CFAbsoluteTimeGetCurrent();
-//	NSLog(@"%s periodStartTime=%f", _cmd, periodStartTime);
 	
 	// Set the timer to load a new page
 	//	[switchTimer release];	// TODO: i think i should need to release this, but if i do, it segfaults
+	// TODO: just make 1 switchTimer, and have it repeats:YES
 	switchTimer = [[NSTimer scheduledTimerWithTimeInterval:(NSTimeInterval)periodLength
                                                          target:self
                                                        selector:@selector(switchToNextPage:)
@@ -272,117 +238,7 @@
                                                         repeats:NO] retain];
 	
 	// Start loading the next page
-//	NSLog(@"%s start loading next page from: %d", _cmd, [listOfWikiLinks count]);
-	if([listOfWikiLinks count]>0) {
-		unsigned randomNum = SSRandomIntBetween(0,[listOfWikiLinks count]);
-		[self startLoadingPageFromURL:[NSURL URLWithString:[listOfWikiLinks objectAtIndex:randomNum]]];
-	}
-	else {
-//		NSLog(@"%s no next page to load - so start over", _cmd);
-		[self startLoadingPageFromURL:[NSURL URLWithString:startingURL]];
-	}
-}
-
-// Example from the oldest version of DOMCore on cocoadev: http://www.cocoadev.com/index.pl?DOMCore1
-- (void)getWikiLinksFromNodeTree:(DOMNode *)parent {
-	DOMNodeList *nodeList = [parent childNodes];
-	unsigned i, length = [nodeList length];
-	NSString *hostName = [@"http://" stringByAppendingString:[nextURL host]];
-	
-	for (i = 0; i < length; i++) {
-		DOMNode *node = [nodeList item:i];
-		[self getWikiLinksFromNodeTree:node];
-		DOMNamedNodeMap *attributes = [node attributes];
-		unsigned a, attCount = [attributes length];
-		
-		if([[node nodeName] isCaseInsensitiveLike:@"a"]) {
-			for (a = 0; a < attCount; a++) {
-				DOMNode *att = [attributes item:a];
-				if([[att nodeName] isCaseInsensitiveLike:@"href"]) {
-					if([[att nodeValue] hasPrefix:@"/wiki/"]) { // get only links that start with wiki
-//						NSLog(@"%s foundlink %@", _cmd, [att nodeValue]);
-						[listOfWikiLinks addObject:[hostName stringByAppendingString:[att nodeValue]]];
-					}
-				}
-			}
-		}
-	}
-	
-	// Do some filtering
-	NSEnumerator *enumerator = [listOfWikiLinks objectEnumerator]; 
-	id link;
-	while( link = [enumerator nextObject] ) {
-		if([link rangeOfString:@"/wiki/Special"].location != NSNotFound) {
-			[listOfWikiLinks removeObject:link];
-		}
-		if([link rangeOfString:@"/wiki/Help"].location != NSNotFound) {
-			[listOfWikiLinks removeObject:link];
-		}
-		if([link rangeOfString:@"/wiki/Image"].location != NSNotFound) {
-			[listOfWikiLinks removeObject:link];
-		}
-		if([link rangeOfString:@"/wiki/Wiktionary"].location != NSNotFound) {
-			[listOfWikiLinks removeObject:link];
-		}
-		if([link rangeOfString:@"/wiki/Wikipedia:"].location != NSNotFound) {
-			[listOfWikiLinks removeObject:link];
-		}
-		if([link rangeOfString:@"/wiki/Main_Page"].location != NSNotFound) {
-			[listOfWikiLinks removeObject:link];
-		}
-		if([link rangeOfString:@"/wiki/Portal:"].location != NSNotFound) {
-			[listOfWikiLinks removeObject:link];
-		}
-		if([link rangeOfString:@"/wiki/profit_organization"].location != NSNotFound) {
-			[listOfWikiLinks removeObject:link];
-		}
-		if([link rangeOfString:@"/wiki/Charitable_organization"].location != NSNotFound) {
-			[listOfWikiLinks removeObject:link];
-		}
-		if([link rangeOfString:@"/wiki/501"].location != NSNotFound) {
-			[listOfWikiLinks removeObject:link];
-		}
-	}
-}
-
-
-//------------------------------------------------------------------------------
-#pragma mark -
-#pragma mark For Multiple Threads
-//------------------------------------------------------------------------------
-
-- (void)prepareImageFromViewOnNewThread:(NSView *)view {
-//	NSLog(@"%s start", _cmd);
-	NSAutoreleasePool *arp = [[NSAutoreleasePool alloc] init];
-	[self prepareImageFromView:view];
-	[arp release];
-//	NSLog(@"%s done", _cmd);
-}
-
-- (void)getWikiLinksFromNodeTreeOnNewThread:(DOMNode *)parent {
-//	NSLog(@"%s start", _cmd);
-	NSAutoreleasePool *arp = [[NSAutoreleasePool alloc] init];
-	[self getWikiLinksFromNodeTree:parent];
-	[arp release];
-//	NSLog(@"%s done", _cmd);
-}
-
-
-//------------------------------------------------------------------------------
-#pragma mark -
-#pragma mark WebView delegate methods
-//------------------------------------------------------------------------------
-
-- (void)webView:(WebView *)sender didReceiveTitle:(NSString *)title forFrame:(WebFrame *)frame
-{
-	if([title length] > 30) {
-		// we want to remove the " - Wikipedia, the free encyclopedia" from the end of the title
-		NSRange endRange = [title rangeOfString:@" - Wikipedia, the free encyclopedia"];
-		// TODO: fix this, cuz there is a point here where it could maybe try to draw nil??
-		//	[currentPageTitle release];
-		nextPageTitle = [[title substringToIndex:endRange.location] retain];
-//		NSLog(@"%s %@", _cmd, nextPageTitle);
-	}
+	[offscreenWebView startLoadingRandomPage];
 }
 
 @end

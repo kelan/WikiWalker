@@ -1,11 +1,18 @@
 TODO:
 
+* check all deallocs for proper memory managament
+* remove all nextImage and nextPageTitle and nextURL stuff
+* make sure the rect sizes are set correctly
+* figure out what to do in startAnimation and stopAnimation
 * try to use JS to get coordinates of link on screen (Jonathan Wight's suggetion)
 	* look at: http://blog.firetree.net/2005/07/04/javascript-find-position/
 
-
-* make stopAnimation do something
+* change name of WikiWalkerView to WWScreenSaverView (?)
+* make stopAnimation do something (?)
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 Did this revision:
 * Changed tmproj to a basic one (instead of using "Import from Xcode", because that messes svn up)
-
+* Added WWOffscreenWebView
+	* this isn't a subclass of WebView, it just has one as an ivar
+	* this handles downloading the webview, getting the image and title
+	

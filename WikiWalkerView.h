@@ -7,10 +7,11 @@
 //
 
 
+#import <Cocoa/Cocoa.h>
 #import <ScreenSaver/ScreenSaver.h>
-
 #import <WebKit/WebKit.h>
 
+#import "WWOffscreenWebView.h"
 
 @interface ComYeahRightKeller_WikiWalkerView : ScreenSaverView {
 	NSImage *currentImage, *nextImage;
@@ -18,34 +19,23 @@
 	float currentFocalHeight, nextFocalHeight;
 	
 	float periodLength, transitionLength;
-	unsigned long int frameCounter;
 	CFAbsoluteTime periodStartTime;
 	
 	NSString *currentPageTitle, *nextPageTitle;
+	NSPoint titleOrigin;
 	float currentTitleWidth;
 	NSMutableDictionary *titleAttributes;
-	NSPoint titleOrigin;
 	
-	
-	WebView *webView;
+	WWOffscreenWebView *offscreenWebView;	
 	NSString *startingURL;
-	NSURL *currentURL, *nextURL;
-	NSMutableArray *listOfWikiLinks;
 	
 	NSTimer *switchTimer;
 	
 }
 
-- (void)startLoadingPageFromURL:(NSURL *)url;
-
-- (void)webViewDidFinishLoading:(NSNotification *)notification;
-
-- (void)prepareImageFromView:(NSView *)view;
 - (void)switchToNextPage:(id)sender;
 
-- (void)getWikiLinksFromNodeTree:(DOMNode *)parent;
+- (void)webImageIsReady:(NSNotification *)notification;
 
-- (void)prepareImageFromViewOnNewThread:(NSView *)view;
-- (void)getWikiLinksFromNodeTreeOnNewThread:(DOMNode *)parent;
 
 @end
