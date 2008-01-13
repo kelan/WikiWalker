@@ -41,7 +41,7 @@
 - (void)startLoadingRandomPage {
 	NSLog(@"%s", _cmd);
 	
-	// Don't want to try to pick a random link until we've loaded all the links.  Normally this isn't an issues with the 15 second interval, but the first tiem it is.  So, if we haven't parsed links yet, just try again in 1 second.
+	// Don't want to try to pick a random link until we've loaded all the links.  Normally this isn't an issues with the 15 second interval, but the first time it is.  So, if we haven't parsed links yet, just try again in 1 second.
 	
 	if(_haveParsedLinks) {
 		if([_listOfWikiLinks count]>0) {

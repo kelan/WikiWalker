@@ -30,15 +30,20 @@
 	NSString *_startingURL;
 	
 	NSTimer *_switchTimer;
+    
+    bool _haveConnectedToInternet;
+    NSTimer *_connectionTimer;
+    NSArray *_defaultImages;
 }
 
 - (void)switchToNextPage:(NSTimer *)timer;
 
 - (void)imageIsReady:(id)sender;
+- (void)checkIfHaveConnected:(NSTimer *)timer;
 
 // Configure Sheet
-- (IBAction)cancelClick: (id) sender;
-- (IBAction)okClick: (id) sender;
+//- (IBAction)cancelClick: (id) sender;
+//- (IBAction)okClick: (id) sender;
 
 
 @end

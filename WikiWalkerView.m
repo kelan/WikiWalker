@@ -44,6 +44,14 @@
 
 		// Start loading the first page
 		[_offscreenWebView startLoadingPageFromURL:[NSURL URLWithString:_startingURL]];
+        
+        // Schedule a timer to check in 10 seconds if we have connected to the internet by then
+        _haveConnectedToInternet = NO;
+        _connectionTimer = [NSTimer scheduledTimerWithTimeInterval:(NSTimeInterval)10.0
+                                                   target:self
+                                                 selector:@selector(checkIfHaveConnected:)
+                                                 userInfo:nil
+                                                  repeats:NO];
     }
     return self;
 }
@@ -57,6 +65,8 @@
 	[_currentPageTitle release];
 	[_nextPageTitle release];
 	[_titleAttributes release];
+    
+    [_defaultImages release];
 
 	[super dealloc];
 }
@@ -87,40 +97,31 @@
 //	NSLog(@"%s imagesize=%0.2f,%0.2f", _cmd, [currentImage size].width, [currentImage size].height);
 //	NSLog(@"%s torect=%0.2f,%0.2f,%0.2f,%0.2f", _cmd, currentToRect.origin.x, currentToRect.origin.y, currentToRect.size.width, currentToRect.size.height);
 //	NSLog(@"%s fromrect=%0.2f,%0.2f,%0.2f,%0.2f", _cmd, currentFromRect.origin.x, currentFromRect.origin.y, currentFromRect.size.width, currentFromRect.size.height);
-//	NSLog(@"%s SUPER DONE", _cmd);
 	
 	float fraction;
 	if(elapsedTime >= _periodLength - _transitionLength) {
-//		NSLog(@"%s next image", _cmd);
 		[_nextImage drawInRect:_nextToRect fromRect:_nextFromRect operation:NSCompositeSourceOver fraction:1.0];
 		fraction = (_periodLength-elapsedTime)/_transitionLength;
 	}
 	else {
 		fraction = 1.0;
 	}
-//	NSLog(@"%s current image", _cmd);
 	[_currentImage drawInRect:_currentToRect fromRect:_currentFromRect operation:NSCompositeSourceOver fraction:fraction];
-//	NSLog(@"%s page title", _cmd);
 	[_currentPageTitle drawAtPoint:_titleOrigin withAttributes:_titleAttributes];
-//	NSLog(@"%s DONE", _cmd);
 }
 
 - (void)animateOneFrame {
-//	NSLog(@"%s START", _cmd);
 	float elapsedTime = CFAbsoluteTimeGetCurrent()-_periodStartTime;
-//	NSLog(@"%s elapsed time=%0.2f", _cmd, elapsedTime);
 	if(_currentImage != nil) {
 		NSRect bounds = [self bounds];
 
 		// Move and zoom
-		float zoomFactor = 1+(bounds.size.width-_currentToRect.size.width)/50000;
+		float zoomFactor = 1+(bounds.size.width-_currentToRect.size.width)/1000000;
 		if(zoomFactor < 1.005) {
 			zoomFactor = 1.005;
 		}
-//		NSLog(@"%s zoomFactor=%f", _cmd, zoomFactor);
 		
 		_currentToRect.origin.y -= (_currentToRect.size.height*_currentFocalHeight+_currentToRect.origin.y-bounds.size.height/2)/10;
-//		NSLog(@"%s current x=%0.2f y=%0.2f", _cmd, currentToRect.origin.x, currentToRect.origin.y);
 		_currentToRect.size.width *= zoomFactor;
 		_currentToRect.size.height *= zoomFactor;
 		_currentToRect.origin.x = (bounds.size.width-_currentToRect.size.width)/2; // keep it centered horizontally
@@ -129,15 +130,13 @@
 			// fade to next page
 			float nextZoomFactor = 1+(bounds.size.width-_nextToRect.size.width)/50000;
 			_nextToRect.origin.y -= (_nextToRect.size.height*_nextFocalHeight+_nextToRect.origin.y-bounds.size.height/2)/10;
-//			NSLog(@"%s next x=%0.2f y=%0.2f", _cmd, nextToRect.origin.x, nextToRect.origin.y);
 			_nextToRect.size.width *= nextZoomFactor;
 			_nextToRect.size.height *= nextZoomFactor;
 			_nextToRect.origin.x = (bounds.size.width-_nextToRect.size.width)/2; // keep it centered horizontally
 		}
 		
-		// Move title text
+		// Scroll title text
 		_titleOrigin.x = (_periodLength-_transitionLength-elapsedTime)/(_periodLength - _transitionLength)*(bounds.size.width+_currentTitleWidth) - _currentTitleWidth;
-//		NSLog(@"%s titleOrigin=%0.2f,%0.2f", _cmd, titleOrigin.x, titleOrigin.y);
 
 		[self setNeedsDisplay:YES];		
 	}
@@ -161,6 +160,10 @@
 
 - (void)imageIsReady:(id)sender {
 	if(sender == _offscreenWebView) {
+        
+        // Mark that we have successfully connected to the internet
+        _haveConnectedToInternet = YES;
+        
 		NSLog(@"%s getting next image", _cmd);
 		// Immediately put the first image to screen.  The rest will be pushed by the switchTimer
 		BOOL updateImmediately = NO;
@@ -188,19 +191,26 @@
 		if(updateImmediately) {
 			[self switchToNextPage:nil];
 		}
+        
 	}
 }
 
 - (void)switchToNextPage:(NSTimer *)timer {
 	NSLog(@"%s %@ -> %@", _cmd, _currentPageTitle, _nextPageTitle);
-	NSImage *lastImage = _currentImage;
-	NSString *lastPageTitle = _currentPageTitle;
+//	NSImage *lastImage = _currentImage;
+//	NSString *lastPageTitle = _currentPageTitle;
 	
-	_currentImage = _nextImage;
+    if(_haveConnectedToInternet) {
+        _currentImage = _nextImage;   
+    }
+    else {
+        _currentImage = [_defaultImages objectAtIndex:4];
+    }
 	_currentPageTitle = _nextPageTitle;
 	_currentFromRect = _nextFromRect;
 	_currentToRect = _nextToRect;
 	_currentFocalHeight = _nextFocalHeight;
+    _currentFocalHeight = 0.8;
 	
 	_titleOrigin = NSMakePoint([self bounds].size.width,[self bounds].size.height*0.25);
 	_currentTitleWidth = [_currentPageTitle sizeWithAttributes:_titleAttributes].width;
@@ -222,7 +232,7 @@
                                    userInfo:nil
                                               repeats:NO];
     
-    
+    // TODO: NSRunLoop -mainRunLoop is Leopard-only.  Find a solution for Tiger
     NSRunLoop *mainRunLoop = [NSRunLoop mainRunLoop];
     [mainRunLoop addTimer:_switchTimer forMode:[mainRunLoop currentMode]];
     
@@ -230,5 +240,29 @@
 	[_offscreenWebView startLoadingRandomPage];
 }
 
+
+- (void)checkIfHaveConnected:(NSTimer *)timer {
+    
+    if(! _haveConnectedToInternet) {
+        NSBundle *bundle = [NSBundle bundleForClass:[self class]];
+        NSString *defaultImageDirName = @"yrk default images";
+        NSString *defaultImagesDirPath = [bundle pathForResource:defaultImageDirName ofType:nil];
+        
+        NSFileManager *fm = [NSFileManager defaultManager];
+        NSArray *defaultImagePaths = [fm directoryContentsAtPath:defaultImagesDirPath];
+        int i, numImages = [defaultImagePaths count];
+        NSMutableArray *images = [NSMutableArray arrayWithCapacity:numImages];
+        NSString *dirPath = [defaultImagesDirPath stringByAppendingString:@"/"];
+        for(i=0; i<numImages; i++) {
+            NSString *thisImagePath = [dirPath stringByAppendingString:[defaultImagePaths objectAtIndex:i]];
+            NSData *thisImageData = [fm contentsAtPath:thisImagePath];
+            NSImage *thisImage = [[NSImage alloc] initWithData:thisImageData];
+            [images addObject:thisImage];
+        }
+        
+        _defaultImages = [[NSArray arrayWithArray:images] retain];
+    }
+    
+}
 
 @end

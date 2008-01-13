@@ -22,6 +22,7 @@
 		436A254D0BBF3388002683A9 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 436A254C0BBF3388002683A9 /* WebKit.framework */; };
 		438AA0AD0BC48C5100664927 /* WWOffscreenWebView.h in Headers */ = {isa = PBXBuildFile; fileRef = 438AA0AB0BC48C5100664927 /* WWOffscreenWebView.h */; };
 		438AA0AE0BC48C5100664927 /* WWOffscreenWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 438AA0AC0BC48C5100664927 /* WWOffscreenWebView.m */; };
+		76277AE90D3A8265008ED99C /* yrk default images in Resources */ = {isa = PBXBuildFile; fileRef = 76277AD60D3A8265008ED99C /* yrk default images */; };
 		8D255AC70486D3F9007BF209 /* WikiWalker_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 32DBCFA80370C50100C91783 /* WikiWalker_Prefix.pch */; };
 		8D255AC80486D3F9007BF209 /* WikiWalkerView.h in Headers */ = {isa = PBXBuildFile; fileRef = F50079790118B23001CA0E54 /* WikiWalkerView.h */; };
 		8D255ACA0486D3F9007BF209 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C167DFE841241C02AAC07 /* InfoPlist.strings */; };
@@ -58,6 +59,7 @@
 		436A254C0BBF3388002683A9 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = /System/Library/Frameworks/WebKit.framework; sourceTree = "<absolute>"; };
 		438AA0AB0BC48C5100664927 /* WWOffscreenWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WWOffscreenWebView.h; sourceTree = "<group>"; };
 		438AA0AC0BC48C5100664927 /* WWOffscreenWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WWOffscreenWebView.m; sourceTree = "<group>"; wrapsLines = 1; };
+		76277AD60D3A8265008ED99C /* yrk default images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "yrk default images"; sourceTree = "<group>"; };
 		8D255AD20486D3F9007BF209 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8D255AD30486D3F9007BF209 /* WikiWalker.saver */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WikiWalker.saver; sourceTree = BUILT_PRODUCTS_DIR; };
 		F50079790118B23001CA0E54 /* WikiWalkerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WikiWalkerView.h; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 		089C167CFE841241C02AAC07 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				76277AD60D3A8265008ED99C /* yrk default images */,
 				436296C40BCA89BB00149DCE /* TestHarness-Info.plist */,
 				4362970D0BCA8B2800149DCE /* TestHarness.nib */,
 				8D255AD20486D3F9007BF209 /* Info.plist */,
@@ -270,6 +273,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4362970E0BCA8B2800149DCE /* TestHarness.nib in Resources */,
+				76277AE90D3A8265008ED99C /* yrk default images in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
