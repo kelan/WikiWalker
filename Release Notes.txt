@@ -13,6 +13,10 @@ $ /System/Library/Frameworks/ScreenSaver.framework/Resources/ScreenSaverEngine.a
 or start it using a hot-corner.  And, even with all that, it still doesn't like multiple monitors.  Sorry about that.
 
 
+I used some examples and tricks from Ben Gottlieb's WikiPath (his winning entry to the Iron Coder contest), specifically:
+* the TestHarness
+* using javascript to get the list of links from the webview
+
 
 
 License (BSD):

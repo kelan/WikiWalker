@@ -7,9 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		43350DC50BC36B2B0048ECD0 /* notes.txt in Resources */ = {isa = PBXBuildFile; fileRef = 43350DC40BC36B2B0048ECD0 /* notes.txt */; };
-		43350DC70BC36C380048ECD0 /* Release Notes.txt in Resources */ = {isa = PBXBuildFile; fileRef = 43350DC60BC36C380048ECD0 /* Release Notes.txt */; };
+		431D86E60BCF61E1009D825B /* WWOffscreenWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 438AA0AC0BC48C5100664927 /* WWOffscreenWebView.m */; };
+		431D86E70BCF61E2009D825B /* WikiWalkerView.m in Sources */ = {isa = PBXBuildFile; fileRef = F500797A0118B23001CA0E54 /* WikiWalkerView.m */; };
+		436296FC0BCA89E800149DCE /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */; };
+		436296FD0BCA89E800149DCE /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 436A254C0BBF3388002683A9 /* WebKit.framework */; };
+		436296FE0BCA89E800149DCE /* ScreenSaver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06F27B2DFFEEEFEF11CA0E56 /* ScreenSaver.framework */; };
+		4362970E0BCA8B2800149DCE /* TestHarness.nib in Resources */ = {isa = PBXBuildFile; fileRef = 4362970D0BCA8B2800149DCE /* TestHarness.nib */; };
+		436297110BCA8B3800149DCE /* HarnessController.m in Sources */ = {isa = PBXBuildFile; fileRef = 436297100BCA8B3800149DCE /* HarnessController.m */; };
+		436297CD0BCA932C00149DCE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 436297CC0BCA932C00149DCE /* main.m */; };
+		436298550BCA970C00149DCE /* HarnessController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4362970F0BCA8B3800149DCE /* HarnessController.h */; };
+		436298560BCA970C00149DCE /* WikiWalkerView.h in Headers */ = {isa = PBXBuildFile; fileRef = F50079790118B23001CA0E54 /* WikiWalkerView.h */; };
+		436298570BCA970C00149DCE /* WWOffscreenWebView.h in Headers */ = {isa = PBXBuildFile; fileRef = 438AA0AB0BC48C5100664927 /* WWOffscreenWebView.h */; };
+		436298580BCA970C00149DCE /* WikiWalker_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 32DBCFA80370C50100C91783 /* WikiWalker_Prefix.pch */; };
 		436A254D0BBF3388002683A9 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 436A254C0BBF3388002683A9 /* WebKit.framework */; };
+		438AA0AD0BC48C5100664927 /* WWOffscreenWebView.h in Headers */ = {isa = PBXBuildFile; fileRef = 438AA0AB0BC48C5100664927 /* WWOffscreenWebView.h */; };
+		438AA0AE0BC48C5100664927 /* WWOffscreenWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 438AA0AC0BC48C5100664927 /* WWOffscreenWebView.m */; };
 		8D255AC70486D3F9007BF209 /* WikiWalker_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 32DBCFA80370C50100C91783 /* WikiWalker_Prefix.pch */; };
 		8D255AC80486D3F9007BF209 /* WikiWalkerView.h in Headers */ = {isa = PBXBuildFile; fileRef = F50079790118B23001CA0E54 /* WikiWalkerView.h */; };
 		8D255ACA0486D3F9007BF209 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C167DFE841241C02AAC07 /* InfoPlist.strings */; };
@@ -17,6 +29,16 @@
 		8D255ACE0486D3F9007BF209 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */; };
 		8D255ACF0486D3F9007BF209 /* ScreenSaver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06F27B2DFFEEEFEF11CA0E56 /* ScreenSaver.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		76F0E8980D3474F000F2319A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8D255AC50486D3F9007BF209;
+			remoteInfo = WikiWalker;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		06F27B2DFFEEEFEF11CA0E56 /* ScreenSaver.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScreenSaver.framework; path = /System/Library/Frameworks/ScreenSaver.framework; sourceTree = "<absolute>"; };
@@ -27,7 +49,15 @@
 		32DBCFA80370C50100C91783 /* WikiWalker_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WikiWalker_Prefix.pch; sourceTree = "<group>"; };
 		43350DC40BC36B2B0048ECD0 /* notes.txt */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; path = notes.txt; sourceTree = "<group>"; };
 		43350DC60BC36C380048ECD0 /* Release Notes.txt */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; path = "Release Notes.txt"; sourceTree = "<group>"; };
+		436296C20BCA89BB00149DCE /* TestHarness.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestHarness.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		436296C40BCA89BB00149DCE /* TestHarness-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "TestHarness-Info.plist"; sourceTree = "<group>"; };
+		4362970D0BCA8B2800149DCE /* TestHarness.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = TestHarness.nib; sourceTree = "<group>"; };
+		4362970F0BCA8B3800149DCE /* HarnessController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = HarnessController.h; sourceTree = "<group>"; };
+		436297100BCA8B3800149DCE /* HarnessController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = HarnessController.m; sourceTree = "<group>"; };
+		436297CC0BCA932C00149DCE /* main.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		436A254C0BBF3388002683A9 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = /System/Library/Frameworks/WebKit.framework; sourceTree = "<absolute>"; };
+		438AA0AB0BC48C5100664927 /* WWOffscreenWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WWOffscreenWebView.h; sourceTree = "<group>"; };
+		438AA0AC0BC48C5100664927 /* WWOffscreenWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WWOffscreenWebView.m; sourceTree = "<group>"; wrapsLines = 1; };
 		8D255AD20486D3F9007BF209 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8D255AD30486D3F9007BF209 /* WikiWalker.saver */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WikiWalker.saver; sourceTree = BUILT_PRODUCTS_DIR; };
 		F50079790118B23001CA0E54 /* WikiWalkerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WikiWalkerView.h; sourceTree = "<group>"; };
@@ -35,6 +65,16 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		436296C00BCA89BB00149DCE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				436296FC0BCA89E800149DCE /* Cocoa.framework in Frameworks */,
+				436296FD0BCA89E800149DCE /* WebKit.framework in Frameworks */,
+				436296FE0BCA89E800149DCE /* ScreenSaver.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8D255ACD0486D3F9007BF209 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -53,7 +93,8 @@
 			children = (
 				43350DC40BC36B2B0048ECD0 /* notes.txt */,
 				43350DC60BC36C380048ECD0 /* Release Notes.txt */,
-				08FB77AFFE84173DC02AAC07 /* Classes */,
+				08FB77AFFE84173DC02AAC07 /* WikiWalker */,
+				76F0E8E60D3478DE00F2319A /* TestHarness */,
 				32DBCFA70370C4F300C91783 /* Other Sources */,
 				089C167CFE841241C02AAC07 /* Resources */,
 				089C1671FE841209C02AAC07 /* Frameworks and Libraries */,
@@ -74,26 +115,30 @@
 		089C167CFE841241C02AAC07 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				436296C40BCA89BB00149DCE /* TestHarness-Info.plist */,
+				4362970D0BCA8B2800149DCE /* TestHarness.nib */,
 				8D255AD20486D3F9007BF209 /* Info.plist */,
 				089C167DFE841241C02AAC07 /* InfoPlist.strings */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
 		};
-		08FB77AFFE84173DC02AAC07 /* Classes */ = {
+		08FB77AFFE84173DC02AAC07 /* WikiWalker */ = {
 			isa = PBXGroup;
 			children = (
 				F50079790118B23001CA0E54 /* WikiWalkerView.h */,
 				F500797A0118B23001CA0E54 /* WikiWalkerView.m */,
+				438AA0AB0BC48C5100664927 /* WWOffscreenWebView.h */,
+				438AA0AC0BC48C5100664927 /* WWOffscreenWebView.m */,
 			);
-			name = Classes;
+			name = WikiWalker;
 			sourceTree = "<group>";
 		};
 		1058C7ACFEA557BF11CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				436A254C0BBF3388002683A9 /* WebKit.framework */,
 				1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */,
+				436A254C0BBF3388002683A9 /* WebKit.framework */,
 				06F27B2DFFEEEFEF11CA0E56 /* ScreenSaver.framework */,
 			);
 			name = "Linked Frameworks";
@@ -112,6 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				8D255AD30486D3F9007BF209 /* WikiWalker.saver */,
+				436296C20BCA89BB00149DCE /* TestHarness.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -119,33 +165,74 @@
 		32DBCFA70370C4F300C91783 /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				436297CC0BCA932C00149DCE /* main.m */,
 				32DBCFA80370C50100C91783 /* WikiWalker_Prefix.pch */,
 			);
 			name = "Other Sources";
 			sourceTree = "<group>";
 		};
+		76F0E8E60D3478DE00F2319A /* TestHarness */ = {
+			isa = PBXGroup;
+			children = (
+				4362970F0BCA8B3800149DCE /* HarnessController.h */,
+				436297100BCA8B3800149DCE /* HarnessController.m */,
+			);
+			name = TestHarness;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		4362984F0BCA96EB00149DCE /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				436298550BCA970C00149DCE /* HarnessController.h in Headers */,
+				436298560BCA970C00149DCE /* WikiWalkerView.h in Headers */,
+				436298570BCA970C00149DCE /* WWOffscreenWebView.h in Headers */,
+				436298580BCA970C00149DCE /* WikiWalker_Prefix.pch in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8D255AC60486D3F9007BF209 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				8D255AC70486D3F9007BF209 /* WikiWalker_Prefix.pch in Headers */,
 				8D255AC80486D3F9007BF209 /* WikiWalkerView.h in Headers */,
+				438AA0AD0BC48C5100664927 /* WWOffscreenWebView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		436296C10BCA89BB00149DCE /* TestHarness */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 436296C50BCA89BB00149DCE /* Build configuration list for PBXNativeTarget "TestHarness" */;
+			buildPhases = (
+				4362984F0BCA96EB00149DCE /* Headers */,
+				436296BF0BCA89BB00149DCE /* Sources */,
+				436296BE0BCA89BB00149DCE /* Resources */,
+				436296C00BCA89BB00149DCE /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				76F0E8990D3474F000F2319A /* PBXTargetDependency */,
+			);
+			name = TestHarness;
+			productName = TestHarness;
+			productReference = 436296C20BCA89BB00149DCE /* TestHarness.app */;
+			productType = "com.apple.product-type.application";
+		};
 		8D255AC50486D3F9007BF209 /* WikiWalker */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = EF7AD72D08BB986600CE4634 /* Build configuration list for PBXNativeTarget "WikiWalker" */;
 			buildPhases = (
 				8D255AC60486D3F9007BF209 /* Headers */,
-				8D255AC90486D3F9007BF209 /* Resources */,
 				8D255ACB0486D3F9007BF209 /* Sources */,
+				8D255AC90486D3F9007BF209 /* Resources */,
 				8D255ACD0486D3F9007BF209 /* Frameworks */,
 				8D255AD00486D3F9007BF209 /* Rez */,
 			);
@@ -165,23 +252,32 @@
 		089C1669FE841209C02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			buildConfigurationList = EF7AD73108BB986600CE4634 /* Build configuration list for PBXProject "WikiWalker" */;
+			compatibilityVersion = "Xcode 2.4";
 			hasScannedForEncodings = 1;
 			mainGroup = 089C166AFE841209C02AAC07 /* WikiWalker */;
 			projectDirPath = "";
+			projectRoot = "";
 			targets = (
 				8D255AC50486D3F9007BF209 /* WikiWalker */,
+				436296C10BCA89BB00149DCE /* TestHarness */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		436296BE0BCA89BB00149DCE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4362970E0BCA8B2800149DCE /* TestHarness.nib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8D255AC90486D3F9007BF209 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				8D255ACA0486D3F9007BF209 /* InfoPlist.strings in Resources */,
-				43350DC50BC36B2B0048ECD0 /* notes.txt in Resources */,
-				43350DC70BC36C380048ECD0 /* Release Notes.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -198,15 +294,35 @@
 /* End PBXRezBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		436296BF0BCA89BB00149DCE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				436297110BCA8B3800149DCE /* HarnessController.m in Sources */,
+				436297CD0BCA932C00149DCE /* main.m in Sources */,
+				431D86E60BCF61E1009D825B /* WWOffscreenWebView.m in Sources */,
+				431D86E70BCF61E2009D825B /* WikiWalkerView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8D255ACB0486D3F9007BF209 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				8D255ACC0486D3F9007BF209 /* WikiWalkerView.m in Sources */,
+				438AA0AE0BC48C5100664927 /* WWOffscreenWebView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		76F0E8990D3474F000F2319A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8D255AC50486D3F9007BF209 /* WikiWalker */;
+			targetProxy = 76F0E8980D3474F000F2319A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		089C167DFE841241C02AAC07 /* InfoPlist.strings */ = {
@@ -220,6 +336,56 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		436296C60BCA89BB00149DCE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "TestHarness-Info.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = TestHarness;
+				WRAPPER_EXTENSION = app;
+				ZERO_LINK = YES;
+			};
+			name = Debug;
+		};
+		436296C70BCA89BB00149DCE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "TestHarness-Info.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = TestHarness;
+				WRAPPER_EXTENSION = app;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
 		EF7AD72E08BB986600CE4634 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -279,6 +445,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		436296C50BCA89BB00149DCE /* Build configuration list for PBXNativeTarget "TestHarness" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				436296C60BCA89BB00149DCE /* Debug */,
+				436296C70BCA89BB00149DCE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		EF7AD72D08BB986600CE4634 /* Build configuration list for PBXNativeTarget "WikiWalker" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

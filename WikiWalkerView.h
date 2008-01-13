@@ -3,7 +3,7 @@
 //  WikiWalker
 //
 //  Created by Kelan Champagne on 3/31/07.
-//  Copyright (c) 2007, Yeah Right Keller. All rights reserved.
+//  Copyright (c) 2007, Kelan Champagne. All rights reserved.
 //
 
 
@@ -14,28 +14,31 @@
 #import "WWOffscreenWebView.h"
 
 @interface ComYeahRightKeller_WikiWalkerView : ScreenSaverView {
-	NSImage *currentImage, *nextImage;
-	NSRect currentFromRect, currentToRect, nextFromRect, nextToRect;
-	float currentFocalHeight, nextFocalHeight;
+	NSImage *_currentImage, *_nextImage;
+	NSRect _currentFromRect, _currentToRect, _nextFromRect, _nextToRect;
+	float _currentFocalHeight, _nextFocalHeight;
 	
-	float periodLength, transitionLength;
-	CFAbsoluteTime periodStartTime;
+	double _periodLength, _transitionLength;
+	CFAbsoluteTime _periodStartTime;
 	
-	NSString *currentPageTitle, *nextPageTitle;
-	NSPoint titleOrigin;
-	float currentTitleWidth;
-	NSMutableDictionary *titleAttributes;
+	NSString *_currentPageTitle, *_nextPageTitle;
+	NSPoint _titleOrigin;
+	float _currentTitleWidth;
+	NSMutableDictionary *_titleAttributes;
 	
-	WWOffscreenWebView *offscreenWebView;	
-	NSString *startingURL;
+	WWOffscreenWebView *_offscreenWebView;	
+	NSString *_startingURL;
 	
-	NSTimer *switchTimer;
-	
+	NSTimer *_switchTimer;
 }
 
-- (void)switchToNextPage:(id)sender;
+- (void)switchToNextPage:(NSTimer *)timer;
 
-- (void)webImageIsReady:(NSNotification *)notification;
+- (void)imageIsReady:(id)sender;
+
+// Configure Sheet
+- (IBAction)cancelClick: (id) sender;
+- (IBAction)okClick: (id) sender;
 
 
 @end
