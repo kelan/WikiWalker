@@ -263,7 +263,6 @@
 		089C1669FE841209C02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			buildConfigurationList = EF7AD73108BB986600CE4634 /* Build configuration list for PBXProject "WikiWalker" */;
-			compatibilityVersion = "Xcode 2.4";
 			hasScannedForEncodings = 1;
 			mainGroup = 089C166AFE841209C02AAC07 /* WikiWalker */;
 			projectDirPath = "";

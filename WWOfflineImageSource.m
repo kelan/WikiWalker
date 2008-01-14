@@ -46,7 +46,7 @@
         newImageNum = SSRandomIntBetween(0, [_images count]-1);
     }
     _currentImageNum = newImageNum;
-    _heightOfNextLink = SSRandomFloatBetween(0, [[_images objectAtIndex:_currentImageNum] size].height);
+    _heightOfNextLink = SSRandomFloatBetween(0, [(NSImage *)([_images objectAtIndex:_currentImageNum]) size].height);
     
 	// Post a Notification that the next page is ready so the WWScreenSaverView can pick it up
     [[NSNotificationCenter defaultCenter] postNotificationName:@"YRK_WWNextImageReady"
