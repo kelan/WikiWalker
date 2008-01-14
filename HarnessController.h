@@ -8,10 +8,10 @@
 
 #import <Cocoa/Cocoa.h>
 #import <ScreenSaver/ScreenSaver.h>
-#import "WikiWalkerView.h"
+#import "WWScreenSaverView.h"
 
 @interface HarnessController : NSObject {
-	IBOutlet ComYeahRightKeller_WikiWalkerView *_saverView;
+	IBOutlet ComYeahRightKeller_WWScreenSaverView *_saverView;
 	IBOutlet NSWindow *_window;
 	
 	NSTimer *_animationTimer;

@@ -1,20 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
 	<key>currentDocument</key>
-	<string>WikiWalkerView.h</string>
+	<string>WWScreenSaverView.m</string>
 	<key>documents</key>
 	<array>
 		<dict>
 			<key>expanded</key>
 			<true/>
 			<key>name</key>
-			<string>trunk</string>
+			<string>WikiWalker</string>
 			<key>regexFolderFilter</key>
 			<string>!.*/(\.[^/]*|CVS|_darcs|_MTN|\{arch\}|blib|.*~\.nib|.*\.(framework|app|pbproj|pbxproj|xcode(proj)?|bundle))$</string>
-			<key>selected</key>
-			<true/>
 			<key>sourceDirectory</key>
 			<string></string>
 		</dict>
@@ -23,21 +21,21 @@
 	<integer>200</integer>
 	<key>metaData</key>
 	<dict>
-		<key>HarnessController.h</key>
+		<key>WWOfflineImageSource.h</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>27</integer>
+				<integer>0</integer>
 				<key>line</key>
-				<integer>14</integer>
+				<integer>16</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
 			<integer>0</integer>
 		</dict>
-		<key>HarnessController.m</key>
+		<key>WWOfflineImageSource.m</key>
 		<dict>
 			<key>caret</key>
 			<dict>
@@ -46,107 +44,91 @@
 				<key>line</key>
 				<integer>0</integer>
 			</dict>
+			<key>columnSelection</key>
+			<false/>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
 			<integer>0</integer>
+			<key>selectFrom</key>
+			<dict>
+				<key>column</key>
+				<integer>0</integer>
+				<key>line</key>
+				<integer>6</integer>
+			</dict>
+			<key>selectTo</key>
+			<dict>
+				<key>column</key>
+				<integer>0</integer>
+				<key>line</key>
+				<integer>0</integer>
+			</dict>
 		</dict>
 		<key>WWOffscreenWebView.h</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>89</integer>
-				<key>line</key>
-				<integer>44</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>1</integer>
-		</dict>
-		<key>WWOffscreenWebView.m</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>83</integer>
+				<integer>37</integer>
 				<key>line</key>
 				<integer>47</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>40</integer>
+			<integer>0</integer>
 		</dict>
-		<key>WikiWalkerView.h</key>
+		<key>WWOffscreenWebView.m</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>23</integer>
+				<integer>0</integer>
 				<key>line</key>
-				<integer>15</integer>
+				<integer>0</integer>
 			</dict>
-			<key>columnSelection</key>
-			<false/>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>0</integer>
-			<key>selectFrom</key>
-			<dict>
-				<key>column</key>
-				<integer>11</integer>
-				<key>line</key>
-				<integer>15</integer>
-			</dict>
-			<key>selectTo</key>
-			<dict>
-				<key>column</key>
-				<integer>44</integer>
-				<key>line</key>
-				<integer>15</integer>
-			</dict>
+			<integer>240</integer>
 		</dict>
-		<key>WikiWalkerView.m</key>
+		<key>WWScreenSaverView.h</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>17</integer>
+				<integer>0</integer>
 				<key>line</key>
-				<integer>299</integer>
+				<integer>0</integer>
 			</dict>
-			<key>columnSelection</key>
-			<false/>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>267</integer>
-			<key>selectFrom</key>
+			<integer>0</integer>
+		</dict>
+		<key>WWScreenSaverView.m</key>
+		<dict>
+			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>12</integer>
+				<integer>64</integer>
 				<key>line</key>
-				<integer>299</integer>
+				<integer>195</integer>
 			</dict>
-			<key>selectTo</key>
-			<dict>
-				<key>column</key>
-				<integer>17</integer>
-				<key>line</key>
-				<integer>299</integer>
-			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>108</integer>
 		</dict>
 		<key>notes.txt</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>5</integer>
-				<key>line</key>
 				<integer>0</integer>
+				<key>line</key>
+				<integer>5</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
@@ -157,16 +139,16 @@
 	<key>openDocuments</key>
 	<array>
 		<string>notes.txt</string>
-		<string>WikiWalkerView.h</string>
-		<string>WikiWalkerView.m</string>
+		<string>WWScreenSaverView.h</string>
+		<string>WWScreenSaverView.m</string>
 		<string>WWOffscreenWebView.h</string>
 		<string>WWOffscreenWebView.m</string>
-		<string>HarnessController.h</string>
-		<string>HarnessController.m</string>
+		<string>WWOfflineImageSource.h</string>
+		<string>WWOfflineImageSource.m</string>
 	</array>
 	<key>showFileHierarchyDrawer</key>
 	<true/>
 	<key>windowFrame</key>
-	<string>{{368, 0}, {927, 878}}</string>
+	<string>{{287, 0}, {1094, 878}}</string>
 </dict>
 </plist>

@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		431D86E60BCF61E1009D825B /* WWOffscreenWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 438AA0AC0BC48C5100664927 /* WWOffscreenWebView.m */; };
-		431D86E70BCF61E2009D825B /* WikiWalkerView.m in Sources */ = {isa = PBXBuildFile; fileRef = F500797A0118B23001CA0E54 /* WikiWalkerView.m */; };
 		436296FC0BCA89E800149DCE /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */; };
 		436296FD0BCA89E800149DCE /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 436A254C0BBF3388002683A9 /* WebKit.framework */; };
 		436296FE0BCA89E800149DCE /* ScreenSaver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06F27B2DFFEEEFEF11CA0E56 /* ScreenSaver.framework */; };
@@ -16,17 +14,22 @@
 		436297110BCA8B3800149DCE /* HarnessController.m in Sources */ = {isa = PBXBuildFile; fileRef = 436297100BCA8B3800149DCE /* HarnessController.m */; };
 		436297CD0BCA932C00149DCE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 436297CC0BCA932C00149DCE /* main.m */; };
 		436298550BCA970C00149DCE /* HarnessController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4362970F0BCA8B3800149DCE /* HarnessController.h */; };
-		436298560BCA970C00149DCE /* WikiWalkerView.h in Headers */ = {isa = PBXBuildFile; fileRef = F50079790118B23001CA0E54 /* WikiWalkerView.h */; };
-		436298570BCA970C00149DCE /* WWOffscreenWebView.h in Headers */ = {isa = PBXBuildFile; fileRef = 438AA0AB0BC48C5100664927 /* WWOffscreenWebView.h */; };
-		436298580BCA970C00149DCE /* WikiWalker_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 32DBCFA80370C50100C91783 /* WikiWalker_Prefix.pch */; };
 		436A254D0BBF3388002683A9 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 436A254C0BBF3388002683A9 /* WebKit.framework */; };
 		438AA0AD0BC48C5100664927 /* WWOffscreenWebView.h in Headers */ = {isa = PBXBuildFile; fileRef = 438AA0AB0BC48C5100664927 /* WWOffscreenWebView.h */; };
 		438AA0AE0BC48C5100664927 /* WWOffscreenWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 438AA0AC0BC48C5100664927 /* WWOffscreenWebView.m */; };
 		76277AE90D3A8265008ED99C /* yrk default images in Resources */ = {isa = PBXBuildFile; fileRef = 76277AD60D3A8265008ED99C /* yrk default images */; };
+		76A527730D3AAE4F0042D9E6 /* WWOfflineImageSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 76A527710D3AAE4F0042D9E6 /* WWOfflineImageSource.h */; };
+		76A527740D3AAE4F0042D9E6 /* WWOfflineImageSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 76A527720D3AAE4F0042D9E6 /* WWOfflineImageSource.m */; };
+		76A527C60D3AB4D70042D9E6 /* WWScreenSaverView.h in Headers */ = {isa = PBXBuildFile; fileRef = F50079790118B23001CA0E54 /* WWScreenSaverView.h */; };
+		76A527C70D3AB4D70042D9E6 /* WWOfflineImageSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 76A527710D3AAE4F0042D9E6 /* WWOfflineImageSource.h */; };
+		76A527C80D3AB4D70042D9E6 /* WWOffscreenWebView.h in Headers */ = {isa = PBXBuildFile; fileRef = 438AA0AB0BC48C5100664927 /* WWOffscreenWebView.h */; };
+		76A527C90D3AB4DE0042D9E6 /* WWScreenSaverView.m in Sources */ = {isa = PBXBuildFile; fileRef = F500797A0118B23001CA0E54 /* WWScreenSaverView.m */; };
+		76A527CA0D3AB4DE0042D9E6 /* WWOfflineImageSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 76A527720D3AAE4F0042D9E6 /* WWOfflineImageSource.m */; };
+		76A527CB0D3AB4DE0042D9E6 /* WWOffscreenWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 438AA0AC0BC48C5100664927 /* WWOffscreenWebView.m */; };
 		8D255AC70486D3F9007BF209 /* WikiWalker_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 32DBCFA80370C50100C91783 /* WikiWalker_Prefix.pch */; };
-		8D255AC80486D3F9007BF209 /* WikiWalkerView.h in Headers */ = {isa = PBXBuildFile; fileRef = F50079790118B23001CA0E54 /* WikiWalkerView.h */; };
+		8D255AC80486D3F9007BF209 /* WWScreenSaverView.h in Headers */ = {isa = PBXBuildFile; fileRef = F50079790118B23001CA0E54 /* WWScreenSaverView.h */; };
 		8D255ACA0486D3F9007BF209 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C167DFE841241C02AAC07 /* InfoPlist.strings */; };
-		8D255ACC0486D3F9007BF209 /* WikiWalkerView.m in Sources */ = {isa = PBXBuildFile; fileRef = F500797A0118B23001CA0E54 /* WikiWalkerView.m */; };
+		8D255ACC0486D3F9007BF209 /* WWScreenSaverView.m in Sources */ = {isa = PBXBuildFile; fileRef = F500797A0118B23001CA0E54 /* WWScreenSaverView.m */; };
 		8D255ACE0486D3F9007BF209 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */; };
 		8D255ACF0486D3F9007BF209 /* ScreenSaver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06F27B2DFFEEEFEF11CA0E56 /* ScreenSaver.framework */; };
 /* End PBXBuildFile section */
@@ -49,7 +52,7 @@
 		1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		32DBCFA80370C50100C91783 /* WikiWalker_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WikiWalker_Prefix.pch; sourceTree = "<group>"; };
 		43350DC40BC36B2B0048ECD0 /* notes.txt */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; path = notes.txt; sourceTree = "<group>"; };
-		43350DC60BC36C380048ECD0 /* Release Notes.txt */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; path = "Release Notes.txt"; sourceTree = "<group>"; };
+		43350DC60BC36C380048ECD0 /* Release Notes.txt */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; path = "Release Notes.txt"; sourceTree = "<group>"; wrapsLines = 1; };
 		436296C20BCA89BB00149DCE /* TestHarness.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestHarness.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		436296C40BCA89BB00149DCE /* TestHarness-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "TestHarness-Info.plist"; sourceTree = "<group>"; };
 		4362970D0BCA8B2800149DCE /* TestHarness.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = TestHarness.nib; sourceTree = "<group>"; };
@@ -60,10 +63,12 @@
 		438AA0AB0BC48C5100664927 /* WWOffscreenWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WWOffscreenWebView.h; sourceTree = "<group>"; };
 		438AA0AC0BC48C5100664927 /* WWOffscreenWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WWOffscreenWebView.m; sourceTree = "<group>"; wrapsLines = 1; };
 		76277AD60D3A8265008ED99C /* yrk default images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "yrk default images"; sourceTree = "<group>"; };
+		76A527710D3AAE4F0042D9E6 /* WWOfflineImageSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WWOfflineImageSource.h; sourceTree = "<group>"; };
+		76A527720D3AAE4F0042D9E6 /* WWOfflineImageSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WWOfflineImageSource.m; sourceTree = "<group>"; };
 		8D255AD20486D3F9007BF209 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8D255AD30486D3F9007BF209 /* WikiWalker.saver */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WikiWalker.saver; sourceTree = BUILT_PRODUCTS_DIR; };
-		F50079790118B23001CA0E54 /* WikiWalkerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WikiWalkerView.h; sourceTree = "<group>"; };
-		F500797A0118B23001CA0E54 /* WikiWalkerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WikiWalkerView.m; sourceTree = "<group>"; };
+		F50079790118B23001CA0E54 /* WWScreenSaverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WWScreenSaverView.h; sourceTree = "<group>"; };
+		F500797A0118B23001CA0E54 /* WWScreenSaverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WWScreenSaverView.m; sourceTree = "<group>"; wrapsLines = 1; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,10 +134,12 @@
 		08FB77AFFE84173DC02AAC07 /* WikiWalker */ = {
 			isa = PBXGroup;
 			children = (
-				F50079790118B23001CA0E54 /* WikiWalkerView.h */,
-				F500797A0118B23001CA0E54 /* WikiWalkerView.m */,
+				F50079790118B23001CA0E54 /* WWScreenSaverView.h */,
+				F500797A0118B23001CA0E54 /* WWScreenSaverView.m */,
 				438AA0AB0BC48C5100664927 /* WWOffscreenWebView.h */,
 				438AA0AC0BC48C5100664927 /* WWOffscreenWebView.m */,
+				76A527710D3AAE4F0042D9E6 /* WWOfflineImageSource.h */,
+				76A527720D3AAE4F0042D9E6 /* WWOfflineImageSource.m */,
 			);
 			name = WikiWalker;
 			sourceTree = "<group>";
@@ -190,10 +197,10 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76A527C60D3AB4D70042D9E6 /* WWScreenSaverView.h in Headers */,
+				76A527C70D3AB4D70042D9E6 /* WWOfflineImageSource.h in Headers */,
+				76A527C80D3AB4D70042D9E6 /* WWOffscreenWebView.h in Headers */,
 				436298550BCA970C00149DCE /* HarnessController.h in Headers */,
-				436298560BCA970C00149DCE /* WikiWalkerView.h in Headers */,
-				436298570BCA970C00149DCE /* WWOffscreenWebView.h in Headers */,
-				436298580BCA970C00149DCE /* WikiWalker_Prefix.pch in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -202,8 +209,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D255AC70486D3F9007BF209 /* WikiWalker_Prefix.pch in Headers */,
-				8D255AC80486D3F9007BF209 /* WikiWalkerView.h in Headers */,
+				8D255AC80486D3F9007BF209 /* WWScreenSaverView.h in Headers */,
 				438AA0AD0BC48C5100664927 /* WWOffscreenWebView.h in Headers */,
+				76A527730D3AAE4F0042D9E6 /* WWOfflineImageSource.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -302,10 +310,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76A527C90D3AB4DE0042D9E6 /* WWScreenSaverView.m in Sources */,
+				76A527CA0D3AB4DE0042D9E6 /* WWOfflineImageSource.m in Sources */,
+				76A527CB0D3AB4DE0042D9E6 /* WWOffscreenWebView.m in Sources */,
 				436297110BCA8B3800149DCE /* HarnessController.m in Sources */,
 				436297CD0BCA932C00149DCE /* main.m in Sources */,
-				431D86E60BCF61E1009D825B /* WWOffscreenWebView.m in Sources */,
-				431D86E70BCF61E2009D825B /* WikiWalkerView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -313,8 +322,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8D255ACC0486D3F9007BF209 /* WikiWalkerView.m in Sources */,
+				8D255ACC0486D3F9007BF209 /* WWScreenSaverView.m in Sources */,
 				438AA0AE0BC48C5100664927 /* WWOffscreenWebView.m in Sources */,
+				76A527740D3AAE4F0042D9E6 /* WWOfflineImageSource.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

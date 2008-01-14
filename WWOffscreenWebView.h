@@ -2,7 +2,6 @@
 //  WWOffscreenWebView.h
 //  WikiWalker
 //
-//  Created by Temp Kelan on 4/4/07.
 //  Copyright 2007 Kelan Champagne. All rights reserved.
 //
 
@@ -10,41 +9,49 @@
 #import <WebKit/WebKit.h>
 #import <ScreenSaver/ScreenSaver.h>
 
+@class ComYeahRightKeller_WWScreenSaverView;
+
+
 @interface WWOffscreenWebView : NSObject {
 	WebView *_webView;
-	NSURL *_currentURL, *_startingURL;
-	
-	BOOL _haveParsedLinks;
-	NSMutableArray *_listOfWikiLinks;
-	
-	NSImage *_imageOfContent;
+    
+	NSURL *_startingURL;
+    NSURL *_nextURL;
 	NSString *_pageTitle;
+	NSImage *_imageOfContent;
+    float _heightOfNextLink;
 	
-	id _client;
 }
 
 - (id)initWithFrame:(NSRect)frame;
 
-- (void)startLoadingRandomPage;
+- (void)startLoadingNextPage;
 - (void)startLoadingPageFromURL:(NSURL *)newURL;
 
+
 // Accessors
-- (void)setClient:(id)newClient;
 - (NSImage *)imageOfContent;
+
+- (float)heightOfNextLink;  // in pixels, from the top of the page
+
+- (NSURL *)nextURL;
+- (void)setNextURL:(NSURL *)newURL;
 
 - (NSString *)pageTitle;
 - (void)setPageTitle:(NSString *)newTitle;
 
-// For Mutli-Threading
-- (void)prepareImageOnNewThread;
-- (void)getWikiLinksFromNodeTreeOnNewThread:(DOMNode *)parent;
 
 // For internal use
+- (void)prepareNextPageOnNewThread;
 - (void)prepareImage;
+- (NSArray *)getWikiLinks;
+- (BOOL)checkIfLinkIsGood:(NSString *)link;
+- (float)getHeightOfLinkWithURL:(NSURL *)linkURL;
 
-//- (void)getWikiLinksFromNodeTree:(DOMNode *)parent;
-- (void)getWikiLinksWithJS;
-- (void)addToListOfLinksIfGood:(NSString *)newLink withLinkNumber:(NSNumber *)linkNumber;
 
+// WebView Delegate Methods
+- (void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)frame;
+- (void)webView:(WebView *)sender didReceiveTitle:(NSString *)title forFrame:(WebFrame *)frame;
 
 @end
+

@@ -1,62 +1,40 @@
 TODO:
 
-* why does the test harness think the saverView isa NSView (and not my WWsaver class)?
-	* maybe ask ben this.  Is this why he manually inited the view, instead of doing it in IB?
-	
-* I made listOfWikiLinks hold dictionaries that have "url" and "index" keys.  So, later, when following a link, I can hopefully gets its locaiton on the page by using javascript and that link number
-
-* check all deallocs for proper memory managament
-* remove all nextImage and nextPageTitle and nextURL stuff
-* make sure the rect sizes are set correctly
-* figure out what to do in startAnimation and stopAnimation
-* try to use JS to get coordinates of link on screen (Jonathan Wight's suggetion)
-	* look at: http://blog.firetree.net/2005/07/04/javascript-find-position/
-	* grab all links with JS, and remeber the link #
-* change name of WikiWalkerView to WWScreenSaverView (?)
-* make stopAnimation do something (?)
+* Make it also zoom towards the x coordinate of the next link, instead of just being centered
 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-Javascript to find object location on page:
-* from: http://blog.firetree.net/2005/07/04/javascript-find-position/
+Flow of the Program
 
-function findPosX(obj)
-{
-  var curleft = 0;
-  if(obj.offsetParent)
-      while(1) 
-      {
-        curleft += obj.offsetLeft;
-        if(!obj.offsetParent)
-          break;
-        obj = obj.offsetParent;
-      }
-  else if(obj.x)
-      curleft += obj.x;
-  return curleft;
-}
+WWScreenSaverView		WWOffscreenWebView								WebView
+-----------------		------------------								-------
+initWithFrame                                           				
+	 	(calls)	--->	startLoadingPageFromURL         				
+	                    				(calls)	--->					loadRequest
+						                                				
+						                                				
+						webView:didFinishLoadForFrame: 			<--- (notification)
+						\-> prepareNextPageOnNewThread
+                            |-> prepareImage
+                            |-> getWikiLinks
+                            |-> getHeightOfLinkWithURL
+                            |
+         (notification) <---/
+nextPageIsReady			
+\-> switchToNextPage (called from above, or timer)
+            \------>        startLoadingNextPage
+                                \-> startingLoadingPageFromURL (Back to top)
 
-function findPosY(obj)
-{
-  var curtop = 0;
-  if(obj.offsetParent)
-      while(1)
-      {
-        curtop += obj.offsetTop;
-        if(!obj.offsetParent)
-          break;
-        obj = obj.offsetParent;
-      }
-  else if(obj.y)
-      curtop += obj.y;
-  return curtop;
-}
 
 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 Did this revision:
-* changed to use WebView FrameLoadDelegate method webView:didFinishLoadForFrame: instead of the Notification
-* changed WWOffsceenWebiView to have a "client" and call imageIsReady on that client when the image is ready, instead of using a Notification
-* added TestHarness Target (to help debugging), HarnessController.[hm], TestHarness.nib
-	* copied from Ben's WikiPath (thanks Ben!)
-* started to prepare code to send to Sonos
+* make everything work and cleaned up extra NSLogs and notes
+* replaced the JavaScript with one that searches via urls, instead of link #
+* changed the flow of updating the new page so that its simpler and more reliable
+* added the javascript function to get the height of the next link in the new page
+* made the zoom focus on the height of the new link
+* renamed WikiWalkerView to WWScreenSaverView
+* took out a lot of extra comments and non-working code, so it looks nice for Sonos
+* finished WWOfflineImageSource for when we can't connect to the internet
+* changed all header comments
 

@@ -17,7 +17,7 @@
 			<key>OUTLETS</key>
 			<dict>
 				<key>_saverView</key>
-				<string>ComYeahRightKeller_WikiWalkerView</string>
+				<string>ComYeahRightKeller_WWScreenSaverView</string>
 				<key>_window</key>
 				<string>NSWindow</string>
 			</dict>
@@ -37,7 +37,7 @@
 				<string>id</string>
 			</dict>
 			<key>CLASS</key>
-			<string>ComYeahRightKeller_WikiWalkerView</string>
+			<string>ComYeahRightKeller_WWScreenSaverView</string>
 			<key>LANGUAGE</key>
 			<string>ObjC</string>
 			<key>OUTLETS</key>

@@ -1,23 +1,25 @@
 WikiWalker
-version 1.0
+version 1.1
 Kelan Champagne <kelan@mac.com>
-2007-04-01
+2008-01-13
 
 
-WikiWalker is a screensaver that wanders through Wikipedia with a zoom/pan/fade effect.  It starts on the Life (disambiguation) page, and picks random links on each page to follow.  If you're lucky it might head towards the Meaning of life page, and then, who knows...
+WikiWalker is a screensaver that wanders through Wikipedia with a zoom/fade effect.  It starts on the Life (disambiguation) page, and picks random links on each page to follow.  If you're lucky it might head towards the Meaning of life page, and then, who knows...
 
-
-Warning: Its super crash-tastic right now, especially when trying to launch with the "Test" button in SystemPreferences (though the Preview does seem ok).  Please either load from the terminal with:
-$ /System/Library/Frameworks/ScreenSaver.framework/Resources/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine -module WikiWalker
-
-or start it using a hot-corner.  And, even with all that, it still doesn't like multiple monitors.  Sorry about that.
-
-
-I used some examples and tricks from Ben Gottlieb's WikiPath (his winning entry to the Iron Coder contest), specifically:
+I have added some code insipired by Ben Gottlieb's WikiPath (his winning entry to the Iron Coder contest), specifically:
 * the TestHarness
 * using javascript to get the list of links from the webview
 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
+Version History:
+
+2008-01-13  1.1 Lots of bug fixes and improvements.
+
+2007-04-01  1.0 Original entry to the IronCoder 5 contest.
+
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
 License (BSD):
 
@@ -30,7 +32,7 @@ modification, are permitted provided that the following conditions are met:
 * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
 * Neither the name of the <organization> nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
 
-THIS SOFTWARE IS PROVIDED BY <copyright holder> ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+THIS SOFTWARE IS PROVIDED BY Kelan Champagne ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
 THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL <copyright
 holder> BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
 LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER

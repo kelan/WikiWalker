@@ -2,11 +2,12 @@
 //  WWOffscreenWebView.m
 //  WikiWalker
 //
-//  Created by Temp Kelan on 4/4/07.
 //  Copyright 2007 Kelan Champagne. All rights reserved.
 //
 
 #import "WWOffscreenWebView.h"
+
+#import "WWScreenSaverView.h"
 
 
 @implementation WWOffscreenWebView
@@ -19,58 +20,43 @@
                                        frameName:@"YRKmainFrame"
                                        groupName:@"YRKgroup"];
 		[_webView setFrameLoadDelegate:self];
-		
-		_listOfWikiLinks = [[NSMutableArray alloc] init];
-		_haveParsedLinks = NO;
+        
 		_imageOfContent = [[NSImage alloc] init];
         [self setPageTitle:@"No Title"];
-		_pageTitle = [[NSString alloc] initWithString:@"Title"];
 	}
 	return self;
 }
 
 - (void)dealloc {
 	[_webView release];
-    [_listOfWikiLinks release];
-    [self setPageTitle:nil];
+    [_pageTitle release];
 	[_startingURL release];
+    [_nextURL release];
+    [_imageOfContent release];
 	
     [super dealloc];
 }
 
-- (void)startLoadingRandomPage {
-	NSLog(@"%s", _cmd);
-	
+- (void)startLoadingNextPage {
+    
 	// Don't want to try to pick a random link until we've loaded all the links.  Normally this isn't an issues with the 15 second interval, but the first time it is.  So, if we haven't parsed links yet, just try again in 1 second.
 	
-	if(_haveParsedLinks) {
-		if([_listOfWikiLinks count]>0) {
-			unsigned randomNum = SSRandomIntBetween(0,[_listOfWikiLinks count]-1);
-			NSURL *randomURL = [[_listOfWikiLinks objectAtIndex:randomNum] objectForKey:@"url"];
-			[self startLoadingPageFromURL:randomURL];
-		}
-		else {
-			NSLog(@"%s LOADING STARING PAGE BY DEFAULT", _cmd);
-			[self startLoadingPageFromURL:_startingURL];
-		}
-	}
-	else {
-		NSLog(@"%s haven't parsed links yet.  wait 1 second...", _cmd);
-		[self performSelector:@selector(startLoadingRandomPage) withObject:nil afterDelay:(NSTimeInterval)1];
-	}
+	if(_nextURL != nil) {
+        [self startLoadingPageFromURL:_nextURL];
+    }
+    else {
+        // we didn't get any links, so start over
+        [self startLoadingPageFromURL:_startingURL];
+    }
 }
 
 - (void)startLoadingPageFromURL:(NSURL *)newURL {
-	NSLog(@"%s %@", _cmd, [newURL absoluteURL]);
-	if(![[newURL absoluteString] isEqualTo:_currentURL]) {
-		_currentURL = [[newURL standardizedURL] retain];
-		[[_webView mainFrame] loadRequest:[NSURLRequest requestWithURL:_currentURL]];
-		
-		// If this is the first URL, save it
-		if(_startingURL == nil) {
-			_startingURL = [newURL retain];
-		}
-	}
+    [[_webView mainFrame] loadRequest:[NSURLRequest requestWithURL:newURL]];
+    
+    // If this is the first URL, save it
+    if(_startingURL == nil) {
+        _startingURL = [newURL retain];
+    }
 }
 
 
@@ -79,12 +65,21 @@
 #pragma mark Accessors
 //------------------------------------------------------------------------------
 
-- (void)setClient:(id)newClient {
-	_client = newClient;
-}
-
 - (NSImage *)imageOfContent {
 	return _imageOfContent;
+}
+
+- (float)heightOfNextLink {
+    return _heightOfNextLink;
+}
+
+- (NSURL *)nextURL {
+    return [_nextURL autorelease];
+}
+- (void)setNextURL:(NSURL *)newURL {
+    NSURL *oldNextURL = _nextURL;
+	_nextURL = [newURL retain];
+	[oldNextURL release];    
 }
 
 - (NSString *)pageTitle {
@@ -99,36 +94,33 @@
 
 //------------------------------------------------------------------------------
 #pragma mark -
-#pragma mark For Multiple Threads
-//------------------------------------------------------------------------------
-
-- (void)prepareImageOnNewThread {
-	NSLog(@"%s start", _cmd);
-	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-	[self prepareImage];
-	[pool release];
-	NSLog(@"%s done", _cmd);
-}
-
-- (void)getWikiLinksFromNodeTreeOnNewThread:(DOMNode *)parent {
-	NSLog(@"%s start", _cmd);
-	[_listOfWikiLinks removeAllObjects];
-	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-//	[self getWikiLinksFromNodeTree:parent];
-	[self getWikiLinksWithJS];
-	_haveParsedLinks = YES;
-	[pool release];
-	NSLog(@"%s done, got %d links", _cmd, [_listOfWikiLinks count]);
-}
-
-
-//------------------------------------------------------------------------------
-#pragma mark -
 #pragma mark For internal use
 //------------------------------------------------------------------------------
 
+- (void)prepareNextPageOnNewThread {
+	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    
+    // create an image from the content
+	[self prepareImage];
+    
+    // pick a random link to go to next
+    NSArray *links = [self getWikiLinks];
+    
+    // pick a random one to go to
+    unsigned nextLinkNum = SSRandomIntBetween(0, [links count]-1);
+    
+    [self setNextURL:[NSURL URLWithString:[links objectAtIndex:nextLinkNum]]];
+    _heightOfNextLink = [self getHeightOfLinkWithURL:_nextURL];
+    
+    NSLog(@"Next Page:%@", [_nextURL absoluteString]);
+    
+	// Post a Notification that the next page is ready so the WWScreenSaverView can pick it up
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"YRK_WWNextImageReady"
+                                                        object:self];
+	[pool release];
+}
+
 - (void)prepareImage {
-	NSLog(@"%s", _cmd);
 	NSView *view = [[[_webView mainFrame] frameView] documentView];
 	NSRect viewRect = [view bounds];
 	NSBitmapImageRep *imageRep = [view bitmapImageRepForCachingDisplayInRect:viewRect];
@@ -151,76 +143,152 @@
 		
 		[oldImage release];
 	}
-		
-	// Tell our client that the image is ready
-	if([_client respondsToSelector:@selector(imageIsReady:)]) {
-		[_client imageIsReady:self];
-	}
 }
 
-
-- (void)getWikiLinksWithJS {
-	int i, numLinks;
-	
-	numLinks = [[_webView stringByEvaluatingJavaScriptFromString: @"document.links.length"] intValue];
-	
+- (NSArray *)getWikiLinks {
+	int i, numLinks = [[_webView stringByEvaluatingJavaScriptFromString: @"document.links.length"] intValue];
+	NSMutableArray *goodLinks = [NSMutableArray arrayWithCapacity:numLinks];
+    
 	for (i = 0; i < numLinks; i++) {
 		NSString *link = [_webView stringByEvaluatingJavaScriptFromString: [NSString stringWithFormat: @"document.links[%d].href", i]];
-		[self addToListOfLinksIfGood: link withLinkNumber:[NSNumber numberWithInt:i]];
+        if([self checkIfLinkIsGood:link]) {
+            [goodLinks addObject:link];
+        }
 	}
+    
+    return goodLinks;
 }
 
-
-- (void)addToListOfLinksIfGood:(NSString *)newLink withLinkNumber:(NSNumber *)linkNumber {
+- (BOOL)checkIfLinkIsGood:(NSString *)link {
+    // We only want links to wiki pages (that start with /wiki/)
+	if([link rangeOfString:@"en.wikipedia.org/wiki/"].location == NSNotFound) return NO;
     
-    // Only want links to wiki pages
-	if([newLink rangeOfString:@"en.wikipedia.org/wiki/"].location == NSNotFound) { // get only links that start with wiki
-		return;
-	}
-
     // But don't want any of the following "special" links
-	if([newLink rangeOfString:@"/wiki/Talk:"].location != NSNotFound) {
-		return;
-	}
-	if([newLink rangeOfString:@"/wiki/Special"].location != NSNotFound) {
-		return;
-	}
-	if([newLink rangeOfString:@"/wiki/Help"].location != NSNotFound) {
-		return;
-	}
-	if([newLink rangeOfString:@"/wiki/Image"].location != NSNotFound) {
-		return;
-	}
-	if([newLink rangeOfString:@"/wiki/Wiktionary"].location != NSNotFound) {
-		return;
-	}
-	if([newLink rangeOfString:@"/wiki/Wikipedia:"].location != NSNotFound) {
-		return;
-	}
-	if([newLink rangeOfString:@"/wiki/Main_Page"].location != NSNotFound) {
-		return;
-	}
-	if([newLink rangeOfString:@"/wiki/Portal:"].location != NSNotFound) {
-		return;
-	}
-	if([newLink rangeOfString:@"/wiki/profit_organization"].location != NSNotFound) {
-		return;
-	}
-	if([newLink rangeOfString:@"/wiki/Charitable_organization"].location != NSNotFound) {
-		return;
-	}
-	if([newLink rangeOfString:@"/wiki/501"].location != NSNotFound) {
-		return;
-	}
+	if([link rangeOfString:@"/wiki/Talk:"].location != NSNotFound) return NO;
+	if([link rangeOfString:@"/wiki/Special"].location != NSNotFound) return NO;
+	if([link rangeOfString:@"/wiki/Help"].location != NSNotFound) return NO;
+	if([link rangeOfString:@"/wiki/Image"].location != NSNotFound) return NO;
+	if([link rangeOfString:@"/wiki/Wiktionary"].location != NSNotFound) return NO;
+	if([link rangeOfString:@"/wiki/Wikipedia:"].location != NSNotFound) return NO;
+	if([link rangeOfString:@"/wiki/Main_Page"].location != NSNotFound) return NO;
+	if([link rangeOfString:@"/wiki/Portal:"].location != NSNotFound) return NO;
+	if([link rangeOfString:@"/wiki/profit_organization"].location != NSNotFound) return NO;
+	if([link rangeOfString:@"/wiki/Charitable_organization"].location != NSNotFound) return NO;
+	if([link rangeOfString:@"/wiki/501"].location != NSNotFound) return NO;
     
-    // TODO: also reject the link if it's to the page we're currently on
+    // Also reject the link if it's to the page we're currently on
+    if(_nextURL != nil) {
+        if([[_nextURL absoluteString] rangeOfString:link].location != NSNotFound) return NO;
+    }
 	
 	// If we made it this far, its a keeper
-	NSDictionary *linkInfo = [NSDictionary dictionaryWithObjectsAndKeys:
-		[NSURL URLWithString:newLink relativeToURL:_currentURL], @"url",
-		linkNumber, @"index",
-		nil];
-	[_listOfWikiLinks addObject:linkInfo];
+    return YES;
+}
+
+// To get the height of the link on the page, we use the following Javascript function, from: http://blog.firetree.net/2005/07/04/javascript-find-position/
+// returns the height of the given link num, in pixels, increasing downward with the top of the page = 0
+// Original Version from the site:
+//function findPosY(obj)
+//{
+//    var curtop = 0;
+//    if(obj.offsetParent)
+//        while(1)
+//        {
+//            curtop += obj.offsetTop;
+//            if(!obj.offsetParent)
+//                break;
+//            obj = obj.offsetParent;
+//        }
+//    else if(obj.y)
+//        curtop += obj.y;
+//    return curtop;
+//}
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// But this won't work because we don't keep all links (we discard a bunch in checkIfLinkIsGood())
+// So, lets go through the links until we get the right URL
+// My Version:
+//function findPosY() {
+//    var targetURL = "http://thetargeturl.com/with/full/path/"
+//    var foundLink = false;
+//    var i = 0;
+//    var linkNum = 0;
+//    while(!foundLink) {
+//        var thisLinkURL = document.links[i].href
+//        if(thisLinkURL == targetURL) {
+//            linkNum = i;
+//            foundLink = true;
+//        }
+//        if(i >= document.links.size) {
+//            foundLink = true;
+//        }
+//        else {
+//            i++;
+//        }
+//    }
+//    if(i == document.links.size) {
+//        return 0.0;
+//    }
+//    var y_pos = 0;
+//    var obj = document.links[linkNum];
+//    if(obj.offsetParent)
+//        while(1) {
+//            y_pos += obj.offsetTop;
+//            if(!obj.offsetParent)
+//		        break;
+//            obj = obj.offsetParent;
+//        }
+//    else if(obj.y)
+//        y_pos += obj.y;
+//    var targetURL = "http://thetargeturl.com/with/full/path/"
+//    var foundLink = false;
+//    var i = 0;
+//    var linkNum = 0;
+//    while(!foundLink) {
+//        var thisLinkURL = document.links[i].href
+//        if(thisLinkURL == targetURL) {
+//            linkNum = i;
+//            foundLink = true;
+//        }
+//        if(i >= document.links.size) {
+//            foundLink = true;
+//        }
+//        else {
+//            i++;
+//        }
+//    }
+//    if(i == document.links.size) {
+//        return 0.0;
+//    }
+//    var y_pos = 0;
+//    var obj = document.links[linkNum];
+//    if(obj.offsetParent)
+//        while(1) {
+//            y_pos += obj.offsetTop;
+//            if(!obj.offsetParent)
+//		        break;
+//            obj = obj.offsetParent;
+//        }
+//    else if(obj.y)
+//        y_pos += obj.y;
+//    return y_pos;
+// }
+
+- (float)getHeightOfLinkWithURL:(NSURL *)linkURL {
+    if(_webView) {
+        NSString *jsCommand = [NSString stringWithFormat:@"var targetURL = '%s'; var foundLink = false; var i = 0; var linkNum = 0; while(!foundLink) { var thisLinkURL = document.links[i].href if(thisLinkURL == targetURL) { linkNum = i; foundLink = true; } if(i >= document.links.size) { foundLink = true; } else { i++; } } if(i == document.links.size) { return 0.0; } var y_pos = 0; var obj = document.links[linkNum]; if(obj.offsetParent) while(1) { y_pos += obj.offsetTop; if(!obj.offsetParent) break; obj = obj.offsetParent; } else if(obj.y) y_pos += obj.y; return y_pos;", [linkURL absoluteString]];
+
+        NSString *jsResult = [_webView stringByEvaluatingJavaScriptFromString:jsCommand];
+        if(jsResult == nil) {
+            NSLog(@"%s ERROR: didn't didn't find link: %@", _cmd, [linkURL absoluteString]);
+            return 0.0;
+        }
+        else {
+            return [jsResult floatValue];
+        }
+    }
+    else {
+        return 0.0;
+    }
 }
 
 
@@ -236,21 +304,15 @@
         return;
 	}
 	
+    // check to make sure its the main frame and no a sub-frame
 	if(frame != [sender mainFrame]) {
 		return;
 	}
-    
-	_haveParsedLinks = NO;
 	
-	[NSThread detachNewThreadSelector:@selector(prepareImageOnNewThread)
+	[NSThread detachNewThreadSelector:@selector(prepareNextPageOnNewThread)
                              toTarget:self
                            withObject:nil];
-
-	[NSThread detachNewThreadSelector:@selector(getWikiLinksFromNodeTreeOnNewThread:)
-                             toTarget:self
-                           withObject:[[_webView mainFrame] DOMDocument]];
 }
-
 
 - (void)webView:(WebView *)sender didReceiveTitle:(NSString *)title forFrame:(WebFrame *)frame {
 	if(sender != _webView) {
@@ -268,3 +330,4 @@
 
 
 @end
+
