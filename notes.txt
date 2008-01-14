@@ -1,6 +1,6 @@
 TODO:
 
-* Make it also zoom towards the x coordinate of the next link, instead of just being centered
+* Make it also zoom towards the x-coordinate of the next link, instead of just being centered
 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 Flow of the Program
@@ -24,17 +24,4 @@ nextPageIsReady
             \------>        startLoadingNextPage
                                 \-> startingLoadingPageFromURL (Back to top)
 
-
-
-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-Did this revision:
-* make everything work and cleaned up extra NSLogs and notes
-* replaced the JavaScript with one that searches via urls, instead of link #
-* changed the flow of updating the new page so that its simpler and more reliable
-* added the javascript function to get the height of the next link in the new page
-* made the zoom focus on the height of the new link
-* renamed WikiWalkerView to WWScreenSaverView
-* took out a lot of extra comments and non-working code, so it looks nice for Sonos
-* finished WWOfflineImageSource for when we can't connect to the internet
-* changed all header comments
 

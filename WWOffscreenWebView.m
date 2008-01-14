@@ -112,8 +112,6 @@
     [self setNextURL:[NSURL URLWithString:[links objectAtIndex:nextLinkNum]]];
     _heightOfNextLink = [self getHeightOfLinkWithURL:_nextURL];
     
-    NSLog(@"Next Page:%@", [_nextURL absoluteString]);
-    
 	// Post a Notification that the next page is ready so the WWScreenSaverView can pick it up
     [[NSNotificationCenter defaultCenter] postNotificationName:@"YRK_WWNextImageReady"
                                                         object:self];
