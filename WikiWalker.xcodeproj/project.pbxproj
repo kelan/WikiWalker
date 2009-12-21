@@ -51,10 +51,8 @@
 		089C167FFE841241C02AAC07 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		32DBCFA80370C50100C91783 /* WikiWalker_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WikiWalker_Prefix.pch; sourceTree = "<group>"; };
-		43350DC40BC36B2B0048ECD0 /* notes.txt */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; path = notes.txt; sourceTree = "<group>"; };
-		43350DC60BC36C380048ECD0 /* Release Notes.txt */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; path = "Release Notes.txt"; sourceTree = "<group>"; wrapsLines = 1; };
 		436296C20BCA89BB00149DCE /* TestHarness.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestHarness.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		436296C40BCA89BB00149DCE /* TestHarness-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "TestHarness-Info.plist"; sourceTree = "<group>"; };
+		436296C40BCA89BB00149DCE /* TestHarness-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TestHarness-Info.plist"; sourceTree = "<group>"; };
 		4362970D0BCA8B2800149DCE /* TestHarness.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = TestHarness.nib; sourceTree = "<group>"; };
 		4362970F0BCA8B3800149DCE /* HarnessController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = HarnessController.h; sourceTree = "<group>"; };
 		436297100BCA8B3800149DCE /* HarnessController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = HarnessController.m; sourceTree = "<group>"; };
@@ -98,8 +96,6 @@
 		089C166AFE841209C02AAC07 /* WikiWalker */ = {
 			isa = PBXGroup;
 			children = (
-				43350DC40BC36B2B0048ECD0 /* notes.txt */,
-				43350DC60BC36C380048ECD0 /* Release Notes.txt */,
 				08FB77AFFE84173DC02AAC07 /* WikiWalker */,
 				76F0E8E60D3478DE00F2319A /* TestHarness */,
 				32DBCFA70370C4F300C91783 /* Other Sources */,
@@ -263,6 +259,7 @@
 		089C1669FE841209C02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			buildConfigurationList = EF7AD73108BB986600CE4634 /* Build configuration list for PBXProject "WikiWalker" */;
+			compatibilityVersion = "Xcode 2.4";
 			hasScannedForEncodings = 1;
 			mainGroup = 089C166AFE841209C02AAC07 /* WikiWalker */;
 			projectDirPath = "";
@@ -440,8 +437,9 @@
 			buildSettings = {
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.5;
 				PREBINDING = NO;
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.6.sdk";
 			};
 			name = Debug;
 		};

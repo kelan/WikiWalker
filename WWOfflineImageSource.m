@@ -19,7 +19,9 @@
         NSString *defaultImagesDirPath = [bundle pathForResource:defaultImageDirName ofType:nil];
         
         NSFileManager *fm = [NSFileManager defaultManager];
-        NSArray *defaultImagePaths = [fm directoryContentsAtPath:defaultImagesDirPath];
+        NSArray *defaultImagePaths = [fm contentsOfDirectoryAtPath:defaultImagesDirPath
+                                                             error:nil];
+        NSAssert(defaultImagePaths, @"Couldn't read dir");
         int i, numImages = [defaultImagePaths count];
         NSMutableArray *images = [NSMutableArray arrayWithCapacity:numImages];
         NSString *dirPath = [defaultImagesDirPath stringByAppendingString:@"/"];

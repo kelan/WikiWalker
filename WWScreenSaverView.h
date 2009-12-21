@@ -13,7 +13,7 @@
 @class WWOfflineImageSource;
 
 
-@interface ComYeahRightKeller_WWScreenSaverView : ScreenSaverView {
+@interface ComYeahRightKeller_WWScreenSaverView : ScreenSaverView <NSMachPortDelegate> {
 	WWOffscreenWebView *_offscreenWebView;	
 	NSString *_startingURL;
 	
@@ -53,7 +53,7 @@
 // We need to do that because, otherwise we'll try to schedule timers on secondary run loops, which doesn't work
 // LEOPARD: In Leopard, you can get the main run loop with [NSRunLoop mainRunLoop], but I'm not sure how to do the equivilent in Tiger
 - (void)setUpThreadingSupport;
-- (void)handleMachMessage:(void *)msg;
+- (void)handleMachMessage:(void *)msg; // for NSMachPortDelegate protocol
 - (void)processNotification:(NSNotification *)notification;
 
 @end
