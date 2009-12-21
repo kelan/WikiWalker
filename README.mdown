@@ -1,0 +1,59 @@
+# WikiWalker
+
+Kelan Champagne (http://yeahrightkeller.com)
+
+
+## Description
+
+WikiWalker is a screensaver that wanders through Wikipedia with a zoom/pan/fade effect.  It starts on the Life (disambiguation) page, and picks random links on each page to follow.  If you're lucky it might head towards the Meaning of life page, and then, who knows...
+
+
+## Details
+
+This was my entry to [ironcoder5](http://ironcoder.org/blog/2007/03/30/ironcoder-v-and-theyre-off/) which was the screensaver API, and the theme was "life".  I made a screen-saver that starts at the Wikipedia page for Life (disambiguation) and then follows random links to walk a path through wikipedia.  For each page it renders the content and does a zoom/pan/fade effect.
+
+The entry that I submitted was pretty rough around the edges (and in the middle too).  It crashes whenever there were 2 instances of it running, which would happen if you were looking at the preview in the Screen Saver Pref Pane and then pressed "test now".  This happened because I registered for a notification that I would send myself when the webview finished loading, but I wouldn't check who's webview it was.  I have fixed that now, and a few other things, but it still has some bugs, including some crashers.
+
+I also didn't get to implement the idea I had where the zoom/pan/fade effect would zoom into the part of the page where the link was that it would be following.  During his judging, Jonathan Wight (schwatoo) suggested executing some JavaScript on the page in order to get the coordinates of the DOM element, which I have been meaning to try.
+
+I have since added some code inspired by Ben Gottlieb's WikiPath (his winning entry to the Iron Coder contest), specifically:
+
+* the TestHarness
+* using javascript to get the list of links from the webview
+
+
+My original entry is archived at the [main ironcoder repository](http://ironcoder.googlecode.com/svn/trunk/entries/ironcoder_5/individual/Kelan%20Champagne%20-%20WikiWalker/) along with a [dmg](http://ironcoder.googlecode.com/svn/trunk/entries/ironcoder_5/ironcoder_5.dmg) with all the entries.
+
+
+## Version History
+
+2008-01-13  1.1 Lots of bug fixes and improvements.
+2007-04-01  1.0 Original entry to the IronCoder 5 contest.
+
+
+## License (BSD)
+
+Copyright (c) 2007, Kelan Champagne (http://yeahrightkeller.com)
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+    * Redistributions of source code must retain the above copyright
+      notice, this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above copyright
+      notice, this list of conditions and the following disclaimer in the
+      documentation and/or other materials provided with the distribution.
+    * Neither the name of the Kelan Champagne nor the
+      names of its contributors may be used to endorse or promote products
+      derived from this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDERS OR CONTRIBUTORS BE LIABLE FOR
+ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
